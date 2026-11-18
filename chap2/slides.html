@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f1e8">
+  <title>約翰一書 2:1–2｜挽回祭與救贖範圍</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <style>
+    :root {
+      --paper: #f4f1e8;
+      --ink: #172a35;
+      --muted: #52646b;
+      --accent: #b14d32;
+      --accent-dark: #793b2b;
+      --teal: #176b68;
+      --line: #c9c8bd;
+      --card: rgba(255, 255, 255, .68);
+      --pico-font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      --pico-color: var(--ink);
+      --pico-background-color: var(--paper);
+      --pico-primary: var(--teal);
+      --pico-primary-hover: #105653;
+      --pico-border-radius: .7rem;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 92% 8%, rgba(23, 107, 104, .08), transparent 28rem),
+        var(--paper);
+      font-size: clamp(16px, 1.65vw, 23px);
+      line-height: 1.55;
+    }
+
+    .slide {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      min-height: 100svh;
+      padding: clamp(2rem, 6vw, 5.5rem) clamp(1.25rem, 8vw, 8rem) 5rem;
+      overflow: hidden;
+      scroll-snap-align: start;
+      isolation: isolate;
+    }
+
+    .slide::after {
+      position: absolute;
+      z-index: -1;
+      right: -9rem;
+      bottom: -16rem;
+      width: 30rem;
+      height: 30rem;
+      border: 1px solid rgba(23, 107, 104, .13);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .slide:nth-of-type(even) { background: rgba(255, 255, 255, .26); }
+    .slide > * { width: min(100%, 1120px); margin-inline: auto; }
+    .eyebrow {
+      margin-bottom: .6rem;
+      color: var(--teal);
+      font-size: .72em;
+      font-weight: 750;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { color: var(--ink); letter-spacing: -.035em; }
+    h1 { max-width: 13ch; margin: .2em 0; font-size: clamp(2.6rem, 7.5vw, 6rem); line-height: 1.13; }
+    h2 { margin: 0 0 .65em; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.2; }
+    h3 { margin: 0 0 .45em; font-size: 1.1em; }
+    p { margin-block: .4em .8em; }
+    .subtitle { color: var(--muted); font-size: 1.12em; }
+    .kicker { margin-top: 2rem; color: var(--muted); font-size: .78em; letter-spacing: .06em; }
+    .accent { color: var(--accent); }
+    .teal { color: var(--teal); }
+    .muted { color: var(--muted); }
+    .small { font-size: .8em; }
+    .lead { max-width: 38ch; font-size: clamp(1.25rem, 2.4vw, 2rem); line-height: 1.45; }
+
+    .scripture {
+      max-width: 58ch;
+      padding: 1.2em 1.4em;
+      border-left: 4px solid var(--accent);
+      background: var(--card);
+      font-size: clamp(1.02rem, 2vw, 1.5rem);
+      line-height: 1.75;
+    }
+
+    .scripture cite { display: block; margin-top: .75em; color: var(--muted); font-size: .72em; font-style: normal; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card {
+      padding: 1.1em 1.2em;
+      border: 1px solid var(--line);
+      border-radius: var(--pico-border-radius);
+      background: var(--card);
+      box-shadow: 0 8px 26px rgba(23, 42, 53, .035);
+    }
+    .card p:last-child, .card ul:last-child { margin-bottom: 0; }
+    .card .label { display: inline-block; margin-bottom: .45em; color: var(--teal); font-size: .72em; font-weight: 750; letter-spacing: .1em; }
+    ul, ol { padding-left: 1.2em; }
+    li { margin-block: .3em; }
+    .compact li { margin-block: .17em; }
+    .answer {
+      display: grid;
+      grid-template-columns: 2.2em 1fr;
+      gap: .75em;
+      align-items: start;
+      padding: .8em 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .answer:last-child { border-bottom: 0; }
+    .letter {
+      display: grid;
+      width: 1.8em;
+      aspect-ratio: 1;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: var(--teal);
+      font-size: .8em;
+      font-weight: 750;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 2.4em 1fr;
+      gap: .85em;
+      align-items: start;
+      margin: .65em 0;
+    }
+    .step .letter { background: var(--accent); }
+    .arrow { color: var(--accent); font-weight: 800; }
+    .quote { color: var(--accent-dark); font-size: 1.08em; font-weight: 700; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .82em;
+      background: var(--card);
+    }
+    th, td { padding: .7em .8em; border-bottom: 1px solid var(--line); vertical-align: top; }
+    thead th { color: white; background: var(--ink); }
+    thead th:first-child { border-radius: .5rem 0 0 0; }
+    thead th:last-child { border-radius: 0 .5rem 0 0; }
+    tbody th { width: 22%; color: var(--teal); background: rgba(23, 107, 104, .06); }
+    .notice {
+      padding: .9em 1.1em;
+      border: 1px solid rgba(177, 77, 50, .3);
+      border-radius: .6rem;
+      background: rgba(177, 77, 50, .07);
+    }
+    .closing { max-width: 24ch; font-size: clamp(2rem, 5vw, 4.5rem); line-height: 1.25; }
+
+    .controls {
+      position: fixed;
+      z-index: 5;
+      right: clamp(.6rem, 2vw, 1.5rem);
+      bottom: clamp(.6rem, 2vw, 1.4rem);
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .35rem;
+      border: 1px solid rgba(23, 42, 53, .14);
+      border-radius: 999px;
+      background: rgba(244, 241, 232, .92);
+      box-shadow: 0 4px 18px rgba(23, 42, 53, .12);
+      backdrop-filter: blur(8px);
+    }
+    .controls button {
+      width: 2.35rem;
+      height: 2.35rem;
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      border-radius: 50%;
+      font-size: 1rem;
+    }
+    #counter { min-width: 4.4em; color: var(--muted); font-size: .72rem; text-align: center; }
+    .progress {
+      position: fixed;
+      z-index: 6;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(23, 42, 53, .1);
+    }
+    .progress span { display: block; width: 0; height: 100%; background: var(--accent); transition: width .25s ease; }
+    @media (max-width: 700px) {
+      .slide { min-height: 100svh; padding-top: 3rem; padding-bottom: 5rem; }
+      .grid, .grid.three { grid-template-columns: 1fr; gap: .65rem; }
+      .card { padding: .85em 1em; }
+      table { font-size: .7em; }
+      th, td { padding: .55em .5em; }
+      tbody th { width: 24%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+    @media print {
+      @page { size: 13.333in 7.5in; margin: 0; }
+      html { scroll-snap-type: none; }
+      body { background: var(--paper); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .slide { width: 13.333in; height: 7.5in; min-height: 0; padding: .6in 1in; break-after: page; }
+      .slide:last-of-type { break-after: auto; }
+      .controls, .progress { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+  <main id="deck">
+    <section class="slide" aria-labelledby="title">
+      <p class="eyebrow">約翰一書 · 第二章</p>
+      <h1 id="title">挽回祭與<br><span class="accent">救贖的範圍</span></h1>
+      <p class="subtitle">約翰一書 2:1–2｜基督為誰而死？</p>
+      <p class="kicker">經文 · 神學 · 傳福音應用</p>
+    </section>
+
+    <section class="slide" aria-labelledby="text">
+      <p class="eyebrow">起點｜約翰一書 2:1–2</p>
+      <h2 id="text">經文怎樣說？</h2>
+      <blockquote class="scripture">
+        我小子們哪，我將這些話寫給你們，是要叫你們不犯罪。若有人犯罪，在父那裏我們有一位中保，就是那義者耶穌基督。<br>
+        他為我們的罪作了挽回祭，不是單為我們的罪，也是為普天下人的罪。
+        <cite>約翰一書 2:1–2</cite>
+      </blockquote>
+    </section>
+
+    <section class="slide" aria-labelledby="question">
+      <p class="eyebrow">先想一想</p>
+      <h2 id="question">主為普天下人的罪作了挽回祭，<br>為何仍有人下地獄？</h2>
+      <div class="answer"><span class="letter">A</span><span>主已經為所有人死，所以不會有人下地獄。</span></div>
+      <div class="answer"><span class="letter">B</span><span>主為所有人死，但人可以因不信而拒絕救恩。</span></div>
+      <div class="answer"><span class="letter">C</span><span>「普天下人」指天下各方各族，不單是猶太人。</span></div>
+      <p class="small muted">你會選哪一個？還有其他理解嗎？</p>
+    </section>
+
+    <section class="slide" aria-labelledby="views">
+      <p class="eyebrow">三種理解</p>
+      <h2 id="views">分歧在於「為誰」與「如何成就」</h2>
+      <div class="grid three">
+        <article class="card">
+          <span class="label">A｜普救論</span>
+          <h3>所有人最終得救</h3>
+          <p>若基督已為所有人的罪付清代價，便不會有人永遠滅亡。</p>
+        </article>
+        <article class="card">
+          <span class="label">B｜普世代贖</span>
+          <h3>救恩可被拒絕</h3>
+          <p>基督為所有人死；人仍須憑信接受，拒絕的人仍受審判。</p>
+        </article>
+        <article class="card">
+          <span class="label">C｜特定救贖</span>
+          <h3>救贖確實成就</h3>
+          <p>「普天下」強調各族各方；基督為選民成就救恩。</p>
+        </article>
+      </div>
+      <p class="small muted">限定的救贖／特定救贖，是加爾文主義五要點中常引起張力的一點。</p>
+    </section>
+
+    <section class="slide" aria-labelledby="importance">
+      <p class="eyebrow">為甚麼值得花一堂討論？</p>
+      <h2 id="importance">這不只是抽象神學</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>真理與信心</h3>
+          <ul class="compact">
+            <li>面對十字架與神主權時，情感上可能有掙扎。</li>
+            <li>看見救恩不只是「提供可能」，也關乎神實際的工作。</li>
+            <li>更認識神，能加深對祂的信靠。</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>真理與生活</h3>
+          <ul class="compact">
+            <li>福音真理上的偏差，可能影響生活中的持守。</li>
+            <li>信仰討論不只為了辯勝，也為了更忠心地跟隨主。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide" aria-labelledby="owen">
+      <p class="eyebrow">約翰・歐文｜《基督之死的死》</p>
+      <h2 id="owen">歐文提出三種可能</h2>
+      <p class="subtitle">基督救贖的範圍與對象，邏輯上可這樣排列：</p>
+      <div class="grid three">
+        <article class="card">
+          <span class="label">A</span>
+          <h3>全人類的所有罪</h3>
+          <p class="small">All the sins of all men</p>
+        </article>
+        <article class="card">
+          <span class="label">B</span>
+          <h3>部分人的所有罪</h3>
+          <p class="small">All the sins of some men</p>
+        </article>
+        <article class="card">
+          <span class="label">C</span>
+          <h3>全人類的部分罪</h3>
+          <p class="small">Some of the sins of all men</p>
+        </article>
+      </div>
+      <p class="small muted">接下來是歐文如何檢視這三個選項；請留意這是他的論證路徑。</p>
+    </section>
+
+    <section class="slide" aria-labelledby="some-sins">
+      <p class="eyebrow">檢視選項 C</p>
+      <h2 id="some-sins">若基督只為所有人的「部分罪」而死？</h2>
+      <div class="card">
+        <p class="lead">那麼，仍有罪沒有被處理，<br><span class="accent">沒有人能因這救贖得完全拯救。</span></p>
+        <p class="muted">這是歐文排除「全人類的部分罪」的推論。</p>
+      </div>
+    </section>
+
+    <section class="slide" aria-labelledby="all-sins">
+      <p class="eyebrow">檢視選項 A</p>
+      <h2 id="all-sins">若基督為全人類的「所有罪」而死？</h2>
+      <div class="grid">
+        <article class="card">
+          <span class="label">推論一</span>
+          <h3>普救論</h3>
+          <p>若所有人的所有罪都已承擔，則所有人都得救。</p>
+        </article>
+        <article class="card">
+          <span class="label">推論二</span>
+          <h3>雙重刑罰的疑問</h3>
+          <p>若人仍因罪受罰，是否等於同一罪債被追討兩次？</p>
+        </article>
+      </div>
+      <p class="notice small"><strong>歐文的問題：</strong>若有人滅亡，基督是否已為他的每一項罪付清代價？</p>
+    </section>
+
+    <section class="slide" aria-labelledby="some-people">
+      <p class="eyebrow">歐文的結論</p>
+      <h2 id="some-people">只有選項 B 前後一致</h2>
+      <p class="lead">基督為<span class="accent">部分人的所有罪</span>而死，<br>使救恩不只是可能，而是真實成就。</p>
+      <div class="card">
+        <h3>歐文引用的經文</h3>
+        <p>「我為他們祈求，不為世人祈求，卻為你所賜給我的人祈求，因他們本是你的。」</p>
+        <p class="small muted">約翰福音 17:9</p>
+      </div>
+      <p class="small muted">他的論點：若基督為所有人死，卻不為所有人代求，兩者之間似乎存在張力。</p>
+    </section>
+
+    <section class="slide" aria-labelledby="unbelief">
+      <p class="eyebrow">歐文的追問｜不信是不是罪？</p>
+      <h2 id="unbelief">「不信」論證</h2>
+      <div class="step"><span class="letter">1</span><span>反對者：人因不信而下地獄。</span></div>
+      <div class="step"><span class="letter">2</span><span>歐文反問：<strong>不信是不是一種罪？</strong></span></div>
+      <div class="grid">
+        <article class="card">
+          <span class="label">若不信不是罪</span>
+          <p>為甚麼人會因不信被定罪？<br><span class="small muted">參：約翰福音 3:18、16:9</span></p>
+        </article>
+        <article class="card">
+          <span class="label">若不信是罪</span>
+          <p>基督有沒有為不信之罪作挽回祭？</p>
+        </article>
+      </div>
+      <p class="small"><span class="arrow">→</span> 若有：為何仍因這罪受罰？　<span class="arrow">→</span> 若沒有：基督就不是為所有人的一切罪而死。</p>
+    </section>
+
+    <section class="slide" aria-labelledby="hunter">
+      <p class="eyebrow">福音派觀點｜吳主光牧師・戴夫・亨特</p>
+      <h2 id="hunter">救生員與溺水者</h2>
+      <div class="card">
+        <p class="lead">救生員已付代價游到身邊，<br>溺水者仍須<span class="teal">停止掙扎、接受救援</span>。</p>
+        <p>亨特以此比喻：基督為全人類付清罪債；人若拒絕這份禮物而滅亡，責任在於人的拒絕，不代表基督沒有付代價。</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>按字面讀經</h3>
+          <p class="small">「神愛世人」（約 3:16）與「為普天下人的罪作挽回祭」（約一 2:2），應讓一般信徒能直接聽懂。</p>
+        </article>
+        <article class="card">
+          <h3>福音普世呼召</h3>
+          <p class="small">神願意萬人得救（提前 2:4），並向罪人發出悔改邀請（賽 1:18）。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide" aria-labelledby="compare">
+      <p class="eyebrow">小結與對比</p>
+      <h2 id="compare">兩邊各自強調甚麼？</h2>
+      <table>
+        <thead>
+          <tr><th scope="col">焦點</th><th scope="col">歐文｜特定救贖</th><th scope="col">亨特｜普世代贖</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">挽回祭</th><td>基督承擔刑罰，救恩確實成就。</td><td>基督為眾人付代價，人仍須以信接受。</td></tr>
+          <tr><th scope="row">「世人」</th><td>理解為選民；與基督為誰代求相呼應。</td><td>理解為全人類；強調福音向眾人呼召。</td></tr>
+          <tr><th scope="row">核心關注</th><td>救恩不是可能性，而是實際成就。</td><td>福音邀請真誠地向全人類發出。</td></tr>
+        </tbody>
+      </table>
+      <p class="small muted">這是兩種觀點的簡要呈現；不同傳統內部仍有更多細節與差異。</p>
+    </section>
+
+    <section class="slide" aria-labelledby="together">
+      <p class="eyebrow">能否只看成對立？</p>
+      <h2 id="together">不同強調，不必抹去共同信念</h2>
+      <div class="grid">
+        <article class="card">
+          <span class="label">歐文不等於</span>
+          <h3>反對傳福音給所有人</h3>
+          <p>福音的普世呼召仍然真實。</p>
+        </article>
+        <article class="card">
+          <span class="label">亨特不等於</span>
+          <h3>否定救恩的真實性</h3>
+          <p>基督的死真實付上代價，救恩不是空談。</p>
+        </article>
+      </div>
+      <p class="lead">先準確理解對方所守護的真理，<br>再談分歧。</p>
+    </section>
+
+    <section class="slide" aria-labelledby="evangelism">
+      <p class="eyebrow">傳福音應用</p>
+      <h2 id="evangelism">我們的信息仍然清楚</h2>
+      <div class="card">
+        <p class="lead">信主就得永生；<br>不信就會滅亡。</p>
+        <p>司布真提醒：神沒有在選民背上畫記號，所以我們要向所有人傳福音。</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>祈禱與盼望</h3>
+          <p class="small">相信神能改變人心，也能在人心裏生發羨慕祂的心。</p>
+        </article>
+        <article class="card">
+          <h3>謙卑與信靠</h3>
+          <p class="small">人會揀錯，但神不會出錯；祂的計劃必定成功。這不代表可以犯罪，也不代表沒有艱難。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide" aria-labelledby="application">
+      <p class="eyebrow">回到經文｜約翰一書 2:1–2</p>
+      <h2 id="application">聽完之後，怎樣面對罪？</h2>
+      <blockquote class="scripture">
+        我將這些話寫給你們，是要叫你們不犯罪。若有人犯罪，在父那裏我們有一位中保，就是那義者耶穌基督。
+        <cite>約翰一書 2:1</cite>
+      </blockquote>
+      <div class="grid">
+        <article class="card">
+          <h3>努力活出聖潔</h3>
+          <p>經文沒有給一個高深新奇的捷徑；仍要努力不犯罪。</p>
+        </article>
+        <article class="card">
+          <h3>犯罪就悔改</h3>
+          <p>靠着中保耶穌基督，回轉歸向神，恢復與祂的關係。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide" aria-labelledby="discussion">
+      <p class="eyebrow">討論與回應</p>
+      <h2 id="discussion" class="closing">我們對神的工作，<br><span class="accent">可以更有信心。</span></h2>
+      <p class="lead">你仍有甚麼疑問？<br>有沒有其他經文或觀點想一起思考？</p>
+      <p class="kicker">約翰一書 2:1–2｜挽回祭與救贖的範圍</p>
+    </section>
+  </main>
+
+  <nav class="controls" aria-label="投影片導覽">
+    <button id="previous" class="secondary outline" type="button" aria-label="上一張">←</button>
+    <span id="counter" aria-live="polite"></span>
+    <button id="next" class="secondary outline" type="button" aria-label="下一張">→</button>
+  </nav>
+  <script>
+    (() => {
+      const slides = [...document.querySelectorAll(".slide")];
+      const counter = document.getElementById("counter");
+      const progress = document.getElementById("progress");
+      let active = 0;
+
+      const show = (index) => {
+        active = Math.max(0, Math.min(index, slides.length - 1));
+        slides[active].scrollIntoView({ behavior: "smooth", block: "start" });
+        counter.textContent = `${active + 1} / ${slides.length}`;
+        progress.style.width = `${((active + 1) / slides.length) * 100}%`;
+      };
+
+      document.getElementById("previous").addEventListener("click", () => show(active - 1));
+      document.getElementById("next").addEventListener("click", () => show(active + 1));
+      document.addEventListener("keydown", (event) => {
+        if (["ArrowRight", "ArrowDown", "PageDown", " "].includes(event.key)) {
+          event.preventDefault();
+          show(active + 1);
+        } else if (["ArrowLeft", "ArrowUp", "PageUp"].includes(event.key)) {
+          event.preventDefault();
+          show(active - 1);
+        } else if (event.key === "Home") {
+          show(0);
+        } else if (event.key === "End") {
+          show(slides.length - 1);
+        }
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) {
+          active = slides.indexOf(visible.target);
+          counter.textContent = `${active + 1} / ${slides.length}`;
+          progress.style.width = `${((active + 1) / slides.length) * 100}%`;
+        }
+      }, { threshold: [0.35, 0.6, 0.85] });
+
+      slides.forEach((slide) => observer.observe(slide));
+      show(0);
+    })();
+  </script>
+</body>
+</html>
