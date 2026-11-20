@@ -988,6 +988,36 @@
       font-size: 1.12rem;
     }
 
+    .s10-venn-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.9rem;
+    }
+
+    .s10-hunt-preview {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+      animation: slideFadeIn 0.3s ease;
+    }
+
+    .s10-hunt-preview .s9-venn-box {
+      flex: 1;
+      padding: 0.4rem;
+    }
+
+    .s10-hunt-preview .s9-venn-svg {
+      height: clamp(140px, 22vh, 200px);
+    }
+
+    @media (max-width: 640px) {
+      .s10-venn-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Presenter Bottom Bar */
     .controls-bar {
       display: flex;
@@ -1613,9 +1643,16 @@
 
       <!-- SLIDE 10: 會影響我們傳福音嗎？ -->
       <section class="slide" data-title="會影響我們傳福音嗎？">
-        <h2>會影響我們傳福音嗎？</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+          <h2 style="margin-bottom: 0;">會影響我們傳福音嗎？</h2>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <button type="button" class="outline ctrl-btn" id="s10PrevStepBtn" aria-label="上一個重點" disabled>◀</button>
+            <span id="s10StepIndicator" aria-live="polite">準備開始</span>
+            <button type="button" class="ctrl-btn" id="s10NextStepBtn">下一步 ▶</button>
+          </div>
+        </div>
         <div class="two-col" style="margin-bottom: 0.9rem;">
-          <div class="info-box">
+          <div class="info-box hidden-el" data-s10-step="1">
             <h4>1. 福音的呼召仍然一樣</h4>
             <p style="margin-bottom: 0.65rem;">信主就得永生，不信就會滅亡。</p>
             <blockquote
@@ -1624,21 +1661,36 @@
             </blockquote>
           </div>
 
-          <div class="info-box">
+          <div class="info-box hidden-el" data-s10-step="2">
             <h4>2. 不阻礙傳福音；相反，我可以真誠相信祈禱、盼望神改變人心</h4>
             <ul style="margin-bottom: 0; font-size: 0.98rem;">
-              <li>我不相信：神想救全人類，卻限制自己的自由讓人自由揀選</li>
-              <li>神的救恩實在施行：神會在人心靈裡生發「羨慕」的心</li>
-              <li><em>若果人掌握最後的決定權，為什麼要祈禱呢，去求人不是更加直接嗎？</em></li>
+              <li data-s10-substep="2a" class="hidden-el">a. 我不相信：神想救全人類，卻限制自己的自由讓人自由揀選</li>
+              <li data-s10-substep="2b" class="hidden-el">b. 神的救恩實在施行：神會在人心靈裡生發「羨慕」的心</li>
+              <li data-s10-substep="2c" class="hidden-el"><em>c. 若果人掌握最後的決定權，為什麼要祈禱呢，去求人不是更加直接嗎？</em></li>
             </ul>
           </div>
         </div>
 
-        <div class="info-box" style="background: var(--slide-accent-soft); border-color: var(--slide-accent);">
+        <div class="info-box hidden-el" data-s10-step="5"
+          style="background: var(--slide-accent-soft); border-color: var(--slide-accent);">
           <ul style="margin-bottom: 0;">
             <li><strong>人會揀錯，但神唔會出錯，神的計劃必定成功</strong>（不代表可以隨便犯罪、也不代表沒有艱難）</li>
             <li>還是，人會揀錯，並可能會打亂神的全盤計劃？</li>
           </ul>
+        </div>
+
+        <div id="s10VennRow" class="s10-venn-row hidden-el">
+          <div id="s10HuntPreview" class="info-box s10-hunt-preview hidden-el">
+            <h4>回顧：Dave Hunt 的文氏圖</h4>
+            <p style="margin-bottom: 0;">代贖涵蓋全人類，救恩藉信心領受。</p>
+            <div class="s9-venn-box s9-venn-box-emerald" id="s10HuntVenn"></div>
+          </div>
+
+          <div id="s10OwenPreview" class="info-box s10-hunt-preview hidden-el">
+            <h4>回顧：約翰歐文的文氏圖</h4>
+            <p style="margin-bottom: 0;">代贖範圍、聖靈賜信心與得救者三層重合。</p>
+            <div class="s9-venn-box s9-venn-box-indigo" id="s10OwenVenn"></div>
+          </div>
         </div>
       </section>
 
@@ -1739,18 +1791,81 @@
         slidesStage.scrollTop = 0;
       }
 
-      prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
-      nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
+      const s10SlideIndex = slides.findIndex((slide) => slide.dataset.title === '會影響我們傳福音嗎？');
+      const s10Steps = Array.from(document.querySelectorAll('[data-s10-step]'));
+      const s10PrevStepBtn = document.getElementById('s10PrevStepBtn');
+      const s10NextStepBtn = document.getElementById('s10NextStepBtn');
+      const s10StepIndicator = document.getElementById('s10StepIndicator');
+      const s10VennRow = document.getElementById('s10VennRow');
+      const s10HuntPreview = document.getElementById('s10HuntPreview');
+      const s10OwenPreview = document.getElementById('s10OwenPreview');
+      const s10Substeps = Array.from(document.querySelectorAll('[data-s10-substep]'));
+      const s10StepLabels = ['1', '2a', '2b', '2c', '3'];
+
+      function addS10VennPreview(sourceSelector, targetId, label) {
+        const source = document.querySelector(sourceSelector);
+        if (!source) throw new Error(`${label} Venn diagram not found`);
+        const svg = source.cloneNode(true);
+        svg.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+        svg.querySelectorAll('.s9-layer-fade').forEach((el) => {
+          el.style.opacity = '1';
+        });
+        svg.setAttribute('aria-label', label);
+        document.getElementById(targetId).appendChild(svg);
+      }
+
+      addS10VennPreview('.s9-col-emerald .s9-venn-svg', 's10HuntVenn', 'Dave Hunt 與吳主光的文氏圖回顧');
+      addS10VennPreview('.s9-col-indigo .s9-venn-svg', 's10OwenVenn', '約翰歐文的文氏圖回顧');
+      let s10CurrentStep = 0;
+
+      function updateS10Step(step) {
+        s10CurrentStep = step;
+        s10Steps.forEach((el) => {
+          const elementStep = Number(el.dataset.s10Step);
+          const isSubstepContainer = elementStep === 2;
+          el.classList.toggle('hidden-el', isSubstepContainer
+            ? s10CurrentStep < 2
+            : elementStep > s10CurrentStep);
+        });
+        s10Substeps.forEach((el, index) => {
+          el.classList.toggle('hidden-el', s10CurrentStep < index + 2);
+        });
+        s10VennRow.classList.toggle('hidden-el', s10CurrentStep < 2 || s10CurrentStep > 4);
+        s10HuntPreview.classList.toggle('hidden-el', s10CurrentStep < 2 || s10CurrentStep > 4);
+        s10OwenPreview.classList.toggle('hidden-el', s10CurrentStep < 3 || s10CurrentStep > 4);
+        s10PrevStepBtn.disabled = s10CurrentStep <= 1;
+        s10NextStepBtn.disabled = s10CurrentStep === s10StepLabels.length;
+        s10StepIndicator.textContent = s10CurrentStep === 0
+          ? '準備開始'
+          : `步驟 ${s10StepLabels[s10CurrentStep - 1]} / ${s10StepLabels.length}`;
+      }
+
+      function navigatePresentation(direction) {
+        if (currentIndex === s10SlideIndex && direction > 0 && s10CurrentStep < s10StepLabels.length) {
+          updateS10Step(s10CurrentStep + 1);
+        } else if (currentIndex === s10SlideIndex && direction < 0 && s10CurrentStep > 1) {
+          updateS10Step(s10CurrentStep - 1);
+        } else {
+          showSlide(currentIndex + direction);
+        }
+      }
+
+      s10PrevStepBtn.addEventListener('click', () => updateS10Step(s10CurrentStep - 1));
+      s10NextStepBtn.addEventListener('click', () => updateS10Step(s10CurrentStep + 1));
+      updateS10Step(0);
+
+      prevBtn.addEventListener('click', () => navigatePresentation(-1));
+      nextBtn.addEventListener('click', () => navigatePresentation(1));
 
       // Keyboard navigation
       document.addEventListener('keydown', (e) => {
         if (overviewDialog.open) return;
         if (e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && e.target.tagName !== 'BUTTON')) {
           e.preventDefault();
-          showSlide(currentIndex + 1);
+          navigatePresentation(1);
         } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
           e.preventDefault();
-          showSlide(currentIndex - 1);
+          navigatePresentation(-1);
         } else if (e.key === 'Home') {
           showSlide(0);
         } else if (e.key === 'End') {
@@ -1770,8 +1885,8 @@
         const dx = e.changedTouches[0].screenX - touchStartX;
         const dy = e.changedTouches[0].screenY - touchStartY;
         if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
-          if (dx < 0) showSlide(currentIndex + 1);
-          else showSlide(currentIndex - 1);
+          if (dx < 0) navigatePresentation(1);
+          else navigatePresentation(-1);
         }
       }, { passive: true });
 
