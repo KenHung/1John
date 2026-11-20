@@ -1,566 +1,2127 @@
-<!doctype html>
-<html lang="zh-Hant">
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="light">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f1e8">
-  <title>約翰一書 2:1–2｜挽回祭與救贖範圍</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>約翰一書查經：有限救贖與普世呼召</title>
+  <!-- Pico CSS v2 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <!-- Traditional Chinese Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;700&amp;display=swap"
+    rel="stylesheet">
   <style>
     :root {
-      --paper: #f4f1e8;
-      --ink: #172a35;
-      --muted: #52646b;
-      --accent: #b14d32;
-      --accent-dark: #793b2b;
-      --teal: #176b68;
-      --line: #c9c8bd;
-      --card: rgba(255, 255, 255, .68);
-      --pico-font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
-      --pico-color: var(--ink);
-      --pico-background-color: var(--paper);
-      --pico-primary: var(--teal);
-      --pico-primary-hover: #105653;
-      --pico-border-radius: .7rem;
+      --pico-font-family: "Noto Sans TC", system-ui, -apple-system, sans-serif;
+      --serif-font: "Noto Serif TC", Georgia, serif;
+      --slide-accent: #1e40af;
+      --slide-accent-soft: rgba(30, 64, 175, 0.08);
+      --slide-gold: #b45309;
+      --slide-gold-soft: rgba(180, 83, 9, 0.09);
+      --slide-danger: #b91c1c;
+      --slide-danger-soft: rgba(185, 28, 28, 0.08);
+      --slide-success: #15803d;
+      --slide-success-soft: rgba(21, 128, 61, 0.09);
     }
 
-    * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-snap-type: y mandatory;
-      background: var(--paper);
+    [data-theme="dark"] {
+      --slide-accent: #60a5fa;
+      --slide-accent-soft: rgba(96, 165, 250, 0.14);
+      --slide-gold: #fbbf24;
+      --slide-gold-soft: rgba(251, 191, 36, 0.14);
+      --slide-danger: #f87171;
+      --slide-danger-soft: rgba(248, 113, 113, 0.14);
+      --slide-success: #4ade80;
+      --slide-success-soft: rgba(74, 222, 128, 0.14);
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
     body {
       margin: 0;
-      color: var(--ink);
-      background:
-        radial-gradient(ellipse at 92% 8%, rgba(23, 107, 104, .08), transparent 28rem),
-        var(--paper);
-      font-size: clamp(16px, 1.65vw, 23px);
-      line-height: 1.55;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--pico-background-color);
+    }
+
+    /* Main Presentation Shell */
+    .deck-wrapper {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    /* Top Progress Bar */
+    .progress-track {
+      width: 100%;
+      height: 5px;
+      background: var(--pico-muted-border-color);
+      flex-shrink: 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--slide-accent);
+      width: 9.09%;
+      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Slide Viewport */
+    .slides-stage {
+      flex: 1;
+      position: relative;
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 1.75rem;
     }
 
     .slide {
-      position: relative;
-      display: flex;
+      display: none;
+      width: 100%;
+      max-width: 1440px;
+      min-height: min(82vh, 760px);
+      margin: auto;
+      padding: 2rem 2.75rem;
+      border-radius: 1rem;
+      border: 1px solid var(--pico-muted-border-color);
+      background: var(--pico-card-background-color);
+      box-shadow: 0 14px 36px -12px rgba(0, 0, 0, 0.12);
       flex-direction: column;
       justify-content: center;
-      width: 100%;
-      min-height: 100svh;
-      padding: clamp(2rem, 6vw, 5.5rem) clamp(1.25rem, 8vw, 8rem) 5rem;
-      overflow: hidden;
-      scroll-snap-align: start;
-      isolation: isolate;
+      animation: slideFadeIn 0.32s ease-out;
     }
 
-    .slide::after {
-      position: absolute;
-      z-index: -1;
-      right: -9rem;
-      bottom: -16rem;
-      width: 30rem;
-      height: 30rem;
-      border: 1px solid rgba(23, 107, 104, .13);
-      border-radius: 50%;
-      content: "";
+    .slide.active {
+      display: flex;
     }
 
-    .slide:nth-of-type(even) { background: rgba(255, 255, 255, .26); }
-    .slide > * { width: min(100%, 1120px); margin-inline: auto; }
-    .eyebrow {
-      margin-bottom: .6rem;
-      color: var(--teal);
-      font-size: .72em;
-      font-weight: 750;
-      letter-spacing: .14em;
-      text-transform: uppercase;
+    @keyframes slideFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    h1, h2, h3 { color: var(--ink); letter-spacing: -.035em; }
-    h1 { max-width: 13ch; margin: .2em 0; font-size: clamp(2.6rem, 7.5vw, 6rem); line-height: 1.13; }
-    h2 { margin: 0 0 .65em; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.2; }
-    h3 { margin: 0 0 .45em; font-size: 1.1em; }
-    p { margin-block: .4em .8em; }
-    .subtitle { color: var(--muted); font-size: 1.12em; }
-    .kicker { margin-top: 2rem; color: var(--muted); font-size: .78em; letter-spacing: .06em; }
-    .accent { color: var(--accent); }
-    .teal { color: var(--teal); }
-    .muted { color: var(--muted); }
-    .small { font-size: .8em; }
-    .lead { max-width: 38ch; font-size: clamp(1.25rem, 2.4vw, 2rem); line-height: 1.45; }
-
-    .scripture {
-      max-width: 58ch;
-      padding: 1.2em 1.4em;
-      border-left: 4px solid var(--accent);
-      background: var(--card);
-      font-size: clamp(1.02rem, 2vw, 1.5rem);
-      line-height: 1.75;
+    /* Typography */
+    .slide h1 {
+      font-family: var(--serif-font);
+      font-size: clamp(1.75rem, 3.2vw, 2.65rem);
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+      color: var(--pico-h1-color);
     }
 
-    .scripture cite { display: block; margin-top: .75em; color: var(--muted); font-size: .72em; font-style: normal; }
-    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .card {
-      padding: 1.1em 1.2em;
-      border: 1px solid var(--line);
-      border-radius: var(--pico-border-radius);
-      background: var(--card);
-      box-shadow: 0 8px 26px rgba(23, 42, 53, .035);
-    }
-    .card p:last-child, .card ul:last-child { margin-bottom: 0; }
-    .card .label { display: inline-block; margin-bottom: .45em; color: var(--teal); font-size: .72em; font-weight: 750; letter-spacing: .1em; }
-    ul, ol { padding-left: 1.2em; }
-    li { margin-block: .3em; }
-    .compact li { margin-block: .17em; }
-    .answer {
-      display: grid;
-      grid-template-columns: 2.2em 1fr;
-      gap: .75em;
-      align-items: start;
-      padding: .8em 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .answer:last-child { border-bottom: 0; }
-    .letter {
-      display: grid;
-      width: 1.8em;
-      aspect-ratio: 1;
-      place-items: center;
-      border-radius: 50%;
-      color: white;
-      background: var(--teal);
-      font-size: .8em;
-      font-weight: 750;
-    }
-    .step {
-      display: grid;
-      grid-template-columns: 2.4em 1fr;
-      gap: .85em;
-      align-items: start;
-      margin: .65em 0;
-    }
-    .step .letter { background: var(--accent); }
-    .arrow { color: var(--accent); font-weight: 800; }
-    .quote { color: var(--accent-dark); font-size: 1.08em; font-weight: 700; }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: .82em;
-      background: var(--card);
-    }
-    th, td { padding: .7em .8em; border-bottom: 1px solid var(--line); vertical-align: top; }
-    thead th { color: white; background: var(--ink); }
-    thead th:first-child { border-radius: .5rem 0 0 0; }
-    thead th:last-child { border-radius: 0 .5rem 0 0; }
-    tbody th { width: 22%; color: var(--teal); background: rgba(23, 107, 104, .06); }
-    .notice {
-      padding: .9em 1.1em;
-      border: 1px solid rgba(177, 77, 50, .3);
-      border-radius: .6rem;
-      background: rgba(177, 77, 50, .07);
-    }
-    .closing { max-width: 24ch; font-size: clamp(2rem, 5vw, 4.5rem); line-height: 1.25; }
-
-    .controls {
-      position: fixed;
-      z-index: 5;
-      right: clamp(.6rem, 2vw, 1.5rem);
-      bottom: clamp(.6rem, 2vw, 1.4rem);
+    .slide h2 {
+      font-family: var(--serif-font);
+      font-size: clamp(1.45rem, 2.5vw, 2.05rem);
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--slide-accent-soft);
+      padding-bottom: 0.5rem;
       display: flex;
       align-items: center;
-      gap: .45rem;
-      padding: .35rem;
-      border: 1px solid rgba(23, 42, 53, .14);
-      border-radius: 999px;
-      background: rgba(244, 241, 232, .92);
-      box-shadow: 0 4px 18px rgba(23, 42, 53, .12);
-      backdrop-filter: blur(8px);
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
-    .controls button {
-      width: 2.35rem;
-      height: 2.35rem;
-      min-height: 0;
+
+    .slide-subtitle {
+      font-size: clamp(1rem, 1.45vw, 1.25rem);
+      color: var(--pico-muted-color);
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+
+    .slide p,
+    .slide li {
+      font-size: clamp(1rem, 1.35vw, 1.2rem);
+      line-height: 1.65;
+    }
+
+    .scripture-quote {
+      font-family: var(--serif-font);
+      font-size: clamp(1.15rem, 1.75vw, 1.55rem);
+      line-height: 1.85;
+      border-left: 5px solid var(--slide-accent);
+      background: var(--slide-accent-soft);
+      padding: 1.25rem 1.75rem;
+      border-radius: 0.65rem;
+      margin: 1rem 0;
+    }
+
+    .scripture-quote .verse-num {
+      font-weight: 700;
+      color: var(--slide-accent);
+      margin-right: 0.35rem;
+      font-size: 0.9em;
+    }
+
+    .key-takeaway {
+      margin-top: 1.25rem;
+      padding: 1rem 1.4rem;
+      border-radius: 0.75rem;
+      background: var(--slide-gold-soft);
+      border-left: 5px solid var(--slide-gold);
+      font-weight: 700;
+      font-size: clamp(1.05rem, 1.45vw, 1.3rem);
+      animation: slideFadeIn 0.35s ease;
+    }
+
+    .discussion-prompt {
+      margin-top: 1rem;
+      padding: 0.65rem 1.1rem;
+      border-radius: 999px;
+      background: var(--slide-accent-soft);
+      color: var(--slide-accent);
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      align-self: flex-start;
+    }
+
+    /* Slide 1 Cover Styling */
+    .cover-slide {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at top right, var(--slide-accent-soft), transparent 60%),
+        radial-gradient(circle at bottom left, var(--slide-gold-soft), transparent 55%),
+        var(--pico-card-background-color);
+    }
+
+    .cover-shapes {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .cover-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.15rem;
+    }
+
+    .cover-title {
+      font-family: var(--serif-font);
+      font-size: clamp(2.35rem, 4.8vw, 3.85rem);
+      letter-spacing: 0.14em;
+      margin: 0;
+      text-indent: 0.14em;
+    }
+
+    .cover-divider {
+      width: 4.5rem;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--slide-gold), transparent);
+    }
+
+    .cover-ref {
+      font-family: var(--serif-font);
+      font-size: clamp(0.85rem, 1.1vw, 1rem);
+      letter-spacing: 0.32em;
+      text-indent: 0.32em;
+      color: var(--pico-muted-color);
+      font-weight: 600;
+      margin: 0;
+    }
+
+    /* Slide 3 Options Grid */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .option-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.85rem 1.2rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--pico-muted-border-color);
+      background: var(--pico-background-color);
+      font-size: clamp(1rem, 1.3vw, 1.18rem);
+      font-weight: 500;
+    }
+
+    .option-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--slide-accent);
+      color: #fff;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Slide 4 Click-to-Reveal Cards */
+    .reveal-card {
+      border: 1px solid var(--pico-muted-border-color);
+      border-radius: 0.75rem;
+      padding: 0.95rem 1.25rem;
+      margin-bottom: 0.85rem;
+      background: var(--pico-background-color);
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+
+    .reveal-card:hover {
+      border-color: var(--slide-accent);
+      transform: translateY(-1px);
+    }
+
+    .reveal-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: clamp(1.02rem, 1.32vw, 1.18rem);
+    }
+
+    .reveal-subpoints {
+      display: none;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--pico-muted-border-color);
+    }
+
+    .reveal-card.revealed .reveal-subpoints {
+      display: block;
+      animation: slideFadeIn 0.25s ease;
+    }
+
+    .reveal-card.revealed {
+      border-color: var(--slide-accent);
+      background: var(--pico-card-background-color);
+    }
+
+    /* Slide 6 John Owen Logic Cards */
+    .owen-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 0.85rem 0;
+    }
+
+    @media (max-width: 820px) {
+      .owen-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .owen-card {
+      border: 2px solid var(--pico-muted-border-color);
+      border-radius: 0.85rem;
+      padding: 1rem;
+      background: var(--pico-background-color);
+      cursor: pointer;
+      transition: all 0.28s ease;
+      position: relative;
+    }
+
+    .owen-card.is-active {
+      border-color: var(--slide-accent);
+      background: var(--slide-accent-soft);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px -8px rgba(30, 64, 175, 0.35);
+    }
+
+    .owen-card.is-eliminated {
+      opacity: 0.55;
+      border-color: var(--slide-danger);
+      background: var(--slide-danger-soft);
+    }
+
+    .owen-card.is-eliminated .owen-title {
+      text-decoration: line-through;
+      color: var(--slide-danger);
+    }
+
+    .owen-card.is-winner {
+      border-color: var(--slide-success);
+      background: var(--slide-success-soft);
+      box-shadow: 0 8px 20px -8px rgba(21, 128, 61, 0.35);
+    }
+
+    .owen-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .owen-en {
+      font-size: 0.85rem;
+      color: var(--pico-muted-color);
+      font-style: italic;
+      margin-bottom: 0.65rem;
+    }
+
+    .owen-detail {
+      display: none;
+      font-size: 0.96rem;
+      line-height: 1.55;
+      padding-top: 0.6rem;
+      border-top: 1px solid var(--pico-muted-border-color);
+    }
+
+    .owen-card.is-active .owen-detail,
+    .owen-card.is-eliminated .owen-detail,
+    .owen-card.is-winner .owen-detail {
+      display: block;
+    }
+
+    /* Slide 7 Flowchart */
+    .flowchart-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+      margin: 0.75rem 0;
+    }
+
+    .flow-node {
+      border: 2px solid var(--pico-muted-border-color);
+      border-radius: 0.75rem;
+      padding: 0.8rem 1.15rem;
+      background: var(--pico-background-color);
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .flow-node.hidden-step {
+      display: none;
+    }
+
+    .flow-node.visible-step {
+      display: block;
+      animation: slideFadeIn 0.32s ease;
+    }
+
+    .flow-node.dimmed-step {
+      opacity: 0.42;
+      filter: grayscale(0.45);
+    }
+
+    .flow-root {
+      max-width: 720px;
+      text-align: center;
+      border-color: var(--slide-accent);
+      background: var(--slide-accent-soft);
+      font-weight: 700;
+    }
+
+    .flow-branches {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    @media (max-width: 820px) {
+      .flow-branches {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .flow-sub-branches {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 0.65rem;
+    }
+
+    @media (max-width: 640px) {
+      .flow-sub-branches {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .flow-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.15rem 0.55rem;
+      border-radius: 0.4rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .badge-warn {
+      background: var(--slide-danger-soft);
+      color: var(--slide-danger);
+    }
+
+    .badge-info {
+      background: var(--slide-accent-soft);
+      color: var(--slide-accent);
+    }
+
+    /* Slide 8 Single-Point Spotlight Tabs */
+    .spotlight-tabs {
+      display: flex;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .spotlight-tab {
+      margin: 0;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.98rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .spotlight-tab.outline {
+      background: transparent;
+    }
+
+    .spotlight-panel {
+      display: none;
+      padding: 1.4rem 1.75rem;
+      border-radius: 0.85rem;
+      border: 1px solid var(--slide-accent);
+      background: var(--pico-background-color);
+      min-height: 185px;
+      animation: slideFadeIn 0.28s ease;
+    }
+
+    .spotlight-panel.active {
+      display: block;
+    }
+
+    /* Slide 9 Interactive Logic Divergence Flowchart */
+    .slide.slide-full {
+      max-width: none;
+      width: 100%;
+      min-height: 100%;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      justify-content: flex-start;
+    }
+
+    .slides-stage.is-full-stage {
+      padding: 0;
+      align-items: stretch;
+    }
+
+    .s9-wrapper {
+      width: 100%;
+      min-height: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #020617;
+      background-image: radial-gradient(rgba(148, 163, 184, 0.16) 1px, transparent 1px);
+      background-size: 22px 22px;
+      color: #f1f5f9;
+      border-radius: 0;
+      padding: 1.25rem 2rem;
+      border: none;
+    }
+
+    .s9-wrapper * {
+      box-sizing: border-box;
+    }
+
+    .s9-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding-bottom: 0.85rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .s9-header h2 {
       margin: 0;
       padding: 0;
-      border-radius: 50%;
-      font-size: 1rem;
+      border: none;
+      font-family: var(--pico-font-family);
+      font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+      font-weight: 900;
+      color: #ffffff;
     }
-    #counter { min-width: 4.4em; color: var(--muted); font-size: .72rem; text-align: center; }
-    .progress {
-      position: fixed;
-      z-index: 6;
-      inset: 0 auto auto 0;
+
+    .s9-nav-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: #0f172a;
+      padding: 0.35rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(51, 65, 85, 0.8);
+    }
+
+    .s9-nav-btn {
+      margin: 0;
+      padding: 0.35rem 0.65rem;
+      border-radius: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .s9-nav-btn:hover {
+      color: #ffffff;
+      background: #1e293b;
+    }
+
+    .s9-step-indicator {
+      padding: 0.25rem 0.6rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fcd34d;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .s9-step1-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .s9-step1-card {
       width: 100%;
-      height: 4px;
-      background: rgba(23, 42, 53, .1);
+      max-width: 780px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid #334155;
+      border-radius: 0.9rem;
+      overflow: hidden;
+      transition: all 0.25s ease;
     }
-    .progress span { display: block; width: 0; height: 100%; background: var(--accent); transition: width .25s ease; }
-    @media (max-width: 700px) {
-      .slide { min-height: 100svh; padding-top: 3rem; padding-bottom: 5rem; }
-      .grid, .grid.three { grid-template-columns: 1fr; gap: .65rem; }
-      .card { padding: .85em 1em; }
-      table { font-size: .7em; }
-      th, td { padding: .55em .5em; }
-      tbody th { width: 24%; }
+
+    .s9-accordion-btn {
+      margin: 0;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      background: transparent;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      gap: 0.65rem;
     }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { transition-duration: .01ms !important; }
+
+    .s9-accordion-btn:hover {
+      background: rgba(30, 41, 59, 0.55);
     }
-    @media print {
-      @page { size: 13.333in 7.5in; margin: 0; }
-      html { scroll-snap-type: none; }
-      body { background: var(--paper); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-      .slide { width: 13.333in; height: 7.5in; min-height: 0; padding: .6in 1in; break-after: page; }
-      .slide:last-of-type { break-after: auto; }
-      .controls, .progress { display: none; }
+
+    .s9-badge-amber {
+      padding: 0.2rem 0.55rem;
+      border-radius: 0.45rem;
+      background: rgba(251, 191, 36, 0.2);
+      color: #fcd34d;
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      font-size: 0.74rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .s9-step1-title {
+      margin: 0;
+      font-size: 0.94rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .s9-step1-details {
+      padding: 0.6rem 1rem 0.85rem;
+      border-top: 1px solid rgba(30, 41, 59, 0.85);
+      text-align: center;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+    }
+
+    .s9-core-pill {
+      margin-top: 0.5rem;
+      display: inline-block;
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+    }
+
+    .s9-fork-svg {
+      width: 100%;
+      max-width: 760px;
+      height: 36px;
+      display: block;
+    }
+
+    .s9-main-grid {
+      display: grid;
+      grid-template-columns: 5fr 2fr 5fr;
+      gap: 1rem;
+      align-items: start;
+      margin-top: 0.35rem;
+    }
+
+    @media (max-width: 980px) {
+      .s9-main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .s9-fork-svg {
+        display: none;
+      }
+    }
+
+    .s9-col-indigo {
+      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid rgba(99, 102, 241, 0.45);
+      border-radius: 0.9rem;
+      padding: 0.95rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .s9-col-emerald {
+      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      border-radius: 0.9rem;
+      padding: 0.95rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .s9-col-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding-bottom: 0.55rem;
+    }
+
+    .s9-col-header-indigo {
+      border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+    }
+
+    .s9-col-header-emerald {
+      border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .s9-col-header h3 {
+      margin: 0.1rem 0 0;
+      font-size: 0.98rem;
+      font-weight: 900;
+      color: #ffffff;
+    }
+
+    .s9-pill-indigo {
+      padding: 0.2rem 0.55rem;
+      border-radius: 0.45rem;
+      background: rgba(99, 102, 241, 0.2);
+      color: #c7d2fe;
+      border: 1px solid rgba(129, 140, 248, 0.35);
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .s9-pill-emerald {
+      padding: 0.2rem 0.55rem;
+      border-radius: 0.45rem;
+      background: rgba(16, 185, 129, 0.2);
+      color: #a7f3d0;
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .s9-venn-box {
+      background: #020617;
+      border-radius: 0.75rem;
+      padding: 0.65rem;
+    }
+
+    .s9-venn-box-indigo {
+      border: 1.5px solid rgba(99, 102, 241, 0.5);
+    }
+
+    .s9-venn-box-emerald {
+      border: 1.5px solid rgba(16, 185, 129, 0.5);
+    }
+
+    .s9-venn-svg {
+      width: 100%;
+      height: clamp(290px, 48vh, 440px);
+      display: block;
+    }
+
+    .s9-center-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      padding-top: 1.75rem;
+    }
+
+    @media (max-width: 980px) {
+      .s9-center-col {
+        padding-top: 0;
+      }
+    }
+
+    .s9-center-badge {
+      align-self: center;
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(251, 191, 36, 0.2);
+      color: #fde68a;
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .s9-focus-card {
+      cursor: pointer;
+      background: #0f172a;
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      border-radius: 0.75rem;
+      padding: 0.65rem 0.75rem;
+      text-align: center;
+      transition: all 0.22s ease;
+    }
+
+    .s9-focus-card:hover {
+      border-color: #fbbf24;
+    }
+
+    .s9-branch-box {
+      background: #0f172a;
+      border: 1px solid #475569;
+      border-radius: 0.75rem;
+      padding: 0.65rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: all 0.25s ease;
+    }
+
+    .s9-path-btn {
+      margin: 0;
+      width: 100%;
+      padding: 0.45rem 0.6rem;
+      border-radius: 0.5rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.18s ease;
+      background: transparent;
+      color: #e2e8f0;
+    }
+
+    .s9-path-btn:hover {
+      color: #ffffff;
+      background: #1e293b;
+    }
+
+    .s9-path-btn.is-selected {
+      background: #fbbf24;
+      color: #020617;
+      box-shadow: 0 2px 8px rgba(251, 191, 36, 0.35);
+    }
+
+    .s9-conclusion-btn {
+      margin: 0;
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      border-radius: 0.75rem;
+      font-size: 0.84rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+      background: #0f172a;
+      color: #fde68a;
+      border: 1px solid rgba(251, 191, 36, 0.65);
+      transition: all 0.2s ease;
+    }
+
+    .s9-conclusion-btn:hover {
+      background: rgba(251, 191, 36, 0.15);
+    }
+
+    .s9-conclusion-btn.is-open {
+      background: #fbbf24;
+      color: #020617;
+      border-color: #fde68a;
+    }
+
+    .s9-conclusion-box-indigo {
+      background: rgba(49, 46, 129, 0.42);
+      border: 1px solid rgba(129, 140, 248, 0.55);
+      border-radius: 0.7rem;
+      padding: 0.75rem 0.95rem;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: #f1f5f9;
+      animation: slideFadeIn 0.28s ease;
+    }
+
+    .s9-conclusion-box-emerald {
+      background: rgba(6, 78, 59, 0.45);
+      border: 1px solid rgba(52, 211, 153, 0.55);
+      border-radius: 0.7rem;
+      padding: 0.75rem 0.95rem;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: #f1f5f9;
+      animation: slideFadeIn 0.28s ease;
+    }
+
+    @keyframes s9DashFlow {
+      to {
+        stroke-dashoffset: -24;
+      }
+    }
+
+    .s9-flow-line-animated {
+      stroke-dasharray: 6 6;
+      animation: s9DashFlow 1.2s linear infinite;
+    }
+
+    .s9-step-unrevealed {
+      opacity: 0.32;
+      filter: grayscale(85%);
+      transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+    }
+
+    .s9-step-unrevealed:hover {
+      opacity: 0.55;
+      filter: grayscale(50%);
+    }
+
+    .s9-ring-amber {
+      box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.78);
+    }
+
+    .s9-chevron {
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
+      transition: transform 0.22s ease;
+    }
+
+    .s9-step-expanded .s9-chevron {
+      transform: rotate(180deg);
+    }
+
+    .s9-layer-fade {
+      transition: opacity 0.45s ease;
+    }
+
+    /* Two-column layout helper */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+
+    @media (max-width: 820px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .info-box {
+      padding: 1.15rem 1.4rem;
+      border-radius: 0.85rem;
+      border: 1px solid var(--pico-muted-border-color);
+      background: var(--pico-background-color);
+    }
+
+    .info-box h4 {
+      margin-bottom: 0.55rem;
+      color: var(--slide-accent);
+      font-size: 1.12rem;
+    }
+
+    /* Presenter Bottom Bar */
+    .controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 1.5rem;
+      border-top: 1px solid var(--pico-muted-border-color);
+      background: var(--pico-card-background-color);
+      flex-shrink: 0;
+      gap: 0.75rem;
+    }
+
+    .controls-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ctrl-btn {
+      margin: 0;
+      padding: 0.45rem 0.95rem;
+      font-size: 0.92rem;
+      border-radius: 0.55rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .slide-counter {
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      font-size: 0.98rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: var(--slide-accent-soft);
+      color: var(--slide-accent);
+      cursor: pointer;
+      border: none;
+    }
+
+    /* Overview Modal Grid */
+    dialog article {
+      max-width: 960px;
+      width: 92vw;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .overview-item {
+      padding: 0.8rem 1rem;
+      border-radius: 0.65rem;
+      border: 1px solid var(--pico-muted-border-color);
+      background: var(--pico-background-color);
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .overview-item:hover,
+    .overview-item.current {
+      border-color: var(--slide-accent);
+      background: var(--slide-accent-soft);
+    }
+
+    .overview-num {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--slide-accent);
+    }
+
+    .overview-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-top: 0.2rem;
+      color: var(--pico-color);
+    }
+
+    .hidden-el {
+      display: none !important;
+    }
+
+    @media (max-width: 640px) {
+      .slides-stage {
+        padding: 0.75rem;
+      }
+
+      .slide {
+        padding: 1.35rem 1.25rem;
+        min-height: 78vh;
+      }
+
+      .controls-bar {
+        padding: 0.5rem 0.75rem;
+      }
+
+      .hide-mobile {
+        display: none;
+      }
+    }
+  </style>
+  <style>
+    .lms-source-label {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background-color: #e0e0e0;
+      color: #333;
+      border-radius: 10px;
+      padding: 4px 4px;
+      font-family: sans-serif;
+      font-size: 10px;
+      pointer-events: none;
+      font-weight: 500;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
+
 <body>
-  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
-  <main id="deck">
-    <section class="slide" aria-labelledby="title">
-      <p class="eyebrow">約翰一書 · 第二章</p>
-      <h1 id="title">挽回祭與<br><span class="accent">救贖的範圍</span></h1>
-      <p class="subtitle">約翰一書 2:1–2｜基督為誰而死？</p>
-      <p class="kicker">經文 · 神學 · 傳福音應用</p>
-    </section>
+  <div class="deck-wrapper">
+    <!-- Top Progress Bar -->
+    <div class="progress-track" role="progressbar" aria-label="簡報進度">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
 
-    <section class="slide" aria-labelledby="text">
-      <p class="eyebrow">起點｜約翰一書 2:1–2</p>
-      <h2 id="text">經文怎樣說？</h2>
-      <blockquote class="scripture">
-        我小子們哪，我將這些話寫給你們，是要叫你們不犯罪。若有人犯罪，在父那裏我們有一位中保，就是那義者耶穌基督。<br>
-        他為我們的罪作了挽回祭，不是單為我們的罪，也是為普天下人的罪。
-        <cite>約翰一書 2:1–2</cite>
-      </blockquote>
-    </section>
+    <!-- Main Slide Stage -->
+    <main class="slides-stage" id="slidesStage">
 
-    <section class="slide" aria-labelledby="question">
-      <p class="eyebrow">先想一想</p>
-      <h2 id="question">主為普天下人的罪作了挽回祭，<br>為何仍有人下地獄？</h2>
-      <div class="answer"><span class="letter">A</span><span>主已經為所有人死，所以不會有人下地獄。</span></div>
-      <div class="answer"><span class="letter">B</span><span>主為所有人死，但人可以因不信而拒絕救恩。</span></div>
-      <div class="answer"><span class="letter">C</span><span>「普天下人」指天下各方各族，不單是猶太人。</span></div>
-      <p class="small muted">你會選哪一個？還有其他理解嗎？</p>
-    </section>
+      <!-- SLIDE 1: 封面 -->
+      <section class="slide cover-slide active" data-title="封面：約翰一書查經">
+        <svg class="cover-shapes" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="coverGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--slide-gold)" stop-opacity="0.22"></stop>
+              <stop offset="100%" stop-color="var(--slide-accent)" stop-opacity="0.06"></stop>
+            </linearGradient>
+            <linearGradient id="coverBlueGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="var(--slide-accent)" stop-opacity="0.18"></stop>
+              <stop offset="100%" stop-color="var(--slide-accent)" stop-opacity="0.02"></stop>
+            </linearGradient>
+          </defs>
+          <circle cx="1040" cy="110" r="240" fill="url(#coverBlueGrad)"></circle>
+          <circle cx="1040" cy="110" r="175" fill="none" stroke="var(--slide-accent)" stroke-opacity="0.14"
+            stroke-width="1.2"></circle>
+          <path d="M-60 540 C 120 430, 290 490, 410 740 L -60 740 Z" fill="url(#coverGoldGrad)"></path>
+          <g transform="translate(210 175) rotate(45)">
+            <rect x="-18" y="-18" width="36" height="36" fill="none" stroke="var(--slide-gold)" stroke-opacity="0.24"
+              stroke-width="1.2"></rect>
+          </g>
+          <circle cx="965" cy="535" r="5" fill="var(--slide-gold)" fill-opacity="0.32"></circle>
+          <line x1="140" y1="610" x2="360" y2="610" stroke="var(--slide-accent)" stroke-opacity="0.14" stroke-width="1">
+          </line>
+        </svg>
+        <div class="cover-content">
+          <h1 class="cover-title">約翰一書查經</h1>
+          <div class="cover-divider" aria-hidden="true"></div>
+          <p class="cover-ref">1 JOHN 2:1–2</p>
+        </div>
+      </section>
 
-    <section class="slide" aria-labelledby="views">
-      <p class="eyebrow">三種理解</p>
-      <h2 id="views">分歧在於「為誰」與「如何成就」</h2>
-      <div class="grid three">
-        <article class="card">
-          <span class="label">A｜普救論</span>
-          <h3>所有人最終得救</h3>
-          <p>若基督已為所有人的罪付清代價，便不會有人永遠滅亡。</p>
-        </article>
-        <article class="card">
-          <span class="label">B｜普世代贖</span>
-          <h3>救恩可被拒絕</h3>
-          <p>基督為所有人死；人仍須憑信接受，拒絕的人仍受審判。</p>
-        </article>
-        <article class="card">
-          <span class="label">C｜特定救贖</span>
-          <h3>救贖確實成就</h3>
-          <p>「普天下」強調各族各方；基督為選民成就救恩。</p>
-        </article>
-      </div>
-      <p class="small muted">限定的救贖／特定救贖，是加爾文主義五要點中常引起張力的一點。</p>
-    </section>
+      <!-- SLIDE 2: 經文 -->
+      <section class="slide" data-title="經文：約翰一書 2:1-2">
+        <h2>經文</h2>
+        <p class="slide-subtitle">約翰一書 2:1-2</p>
+        <blockquote class="scripture-quote">
+          <p style="margin-bottom: 0.85rem;">
+            <span class="verse-num">1</span>我小子們哪，我將這些話寫給你們，是要叫你們不犯罪。若有人犯罪，在父那裏我們有一位中保，就是那義者耶穌基督。
+          </p>
+          <p style="margin-bottom: 0;">
+            <span class="verse-num">2</span>他為我們的罪作了挽回祭，不是單為我們的罪，也是為普天下人的罪。
+          </p>
+        </blockquote>
+      </section>
 
-    <section class="slide" aria-labelledby="responses">
-      <p class="eyebrow">各點淺評</p>
-      <h2 id="responses">三種立場，各自的經文與傳統</h2>
-      <div class="grid">
-        <article class="card">
-          <span class="label">普救論</span>
-          <p>「所有人都得救」明顯與聖經所說的審判有張力。</p>
-          <p class="small">「不信的……他們的分就在燒着硫磺的火湖裏；這是第二次的死。」<br>啟示錄 21:8</p>
-        </article>
-        <article class="card">
-          <span class="label">普世代贖</span>
-          <p>主為所有人死，人仍可因不信拒絕挽回祭。</p>
-          <p class="small muted">常見於天主教與現代福音派的論述。</p>
-        </article>
-        <article class="card">
-          <span class="label">特定救贖</span>
-          <p>「普天下」強調各方各族，不單是猶太人。</p>
-          <p class="small muted">改教家與清教徒的理解。</p>
-        </article>
-      </div>
-      <p class="small muted">問題留給大家：你想到哪些經文？</p>
-    </section>
+      <!-- SLIDE 3: 問題 -->
+      <section class="slide" data-title="問題：為何仍有人下地獄？">
+        <h2>問題</h2>
+        <blockquote class="scripture-quote" style="padding: 0.95rem 1.4rem; margin: 0.5rem 0 1rem;">
+          他為我們的罪作了挽回祭，不是單為我們的罪，也是為普天下人的罪。
+        </blockquote>
+        <p style="font-weight: 700; font-size: clamp(1.15rem, 1.6vw, 1.4rem); margin-bottom: 0.5rem;">
+          主為普天下人的罪作了挽回祭，為何仍有人下地獄？
+        </p>
+        <div class="options-grid">
+          <div class="option-pill"><span class="option-letter">a</span><span>主已經為了所有人死，所以不會有人下地獄</span></div>
+          <div class="option-pill"><span class="option-letter">b</span><span>主為所有人死，但人仍然可以因為不信拒絕挽回祭而下地獄</span></div>
+          <div class="option-pill"><span class="option-letter">c</span><span>「普天下人」不解作所有人，而是強調天下各方各民族，不單是猶太人</span>
+          </div>
+          <div class="option-pill"><span class="option-letter">d</span><span>其他</span></div>
+        </div>
+      </section>
 
-    <section class="slide" aria-labelledby="importance">
-      <p class="eyebrow">為甚麼值得花一堂討論？</p>
-      <h2 id="importance">這題目重要嗎？</h2>
-      <div class="grid">
-        <article class="card">
-          <h3>信主多年後，才接受這看法</h3>
-          <ul class="compact">
-            <li>改教家／清教徒的看法，情感上並不容易接受。</li>
-            <li>會問：神不應該救所有人嗎？</li>
-            <li>十字架有令人討厭之處；跟隨主也要歡喜承受祂所受的譏俏。</li>
+      <!-- SLIDE 4: 各點淺評 (Click to reveal one point at a time) -->
+      <section class="slide" data-title="各點淺評">
+        <h2>
+          <span>各點淺評</span>
+          <div>
+            <button type="button" class="outline ctrl-btn" id="s4HideAllBtn">全部收起</button>
+          </div>
+        </h2>
+
+        <div class="reveal-card" data-s4-card>
+          <div class="reveal-card-header">
+            <span><strong style="color: var(--slide-accent);">a.</strong> 主已經為了所有人死，所以不會有人下地獄</span>
+          </div>
+          <div class="reveal-subpoints">
+            <ul style="margin-bottom: 0;">
+              <li><strong>普救論（Universalism）</strong></li>
+              <li>明顯和聖經矛盾 ——「惟有膽怯的、不信的、可憎的、殺人的、淫亂的、行邪術的、拜偶像的，和一切說謊話的，他們的分就在燒着硫磺的火湖裏；這是第二次的死。」（啟示錄 21:8）</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="reveal-card" data-s4-card>
+          <div class="reveal-card-header">
+            <span><strong style="color: var(--slide-accent);">b.</strong> 主為所有人死，但人仍然可以因為不信拒絕挽回祭而下地獄</span>
+          </div>
+          <div class="reveal-subpoints">
+            <ul style="margin-bottom: 0;">
+              <li><strong>天主教、現代福音派</strong></li>
+              <li>普遍、容易理解的睇法，只是嚴格來講未必最合乎聖經</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="reveal-card" data-s4-card>
+          <div class="reveal-card-header">
+            <span><strong style="color: var(--slide-accent);">c.</strong> 「普天下人」不解作所有人，而是強調天下各方各民族，不單是猶太人</span>
+          </div>
+          <div class="reveal-subpoints">
+            <ul style="margin-bottom: 0;">
+              <li><strong>改教家、清教徒</strong></li>
+              <li>神學上稱為「限定的救贖」，和「因信稱義」有深度關聯</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: 這個題目重要嗎，值得用一堂去講？ -->
+      <section class="slide" data-title="這個題目重要嗎，值得用一堂去講？">
+        <h2>這個題目重要嗎，值得用一堂去講？</h2>
+        <div class="two-col" style="margin-top: 0.75rem;">
+          <div class="info-box">
+            <h4>1. 個人見證</h4>
+            <ul>
+              <li>我自己信主一定年日之後，才接受改教家／清教徒看法</li>
+              <li>初時情感上不接受：「神不應該救所有的人嗎？」</li>
+              <li>後來明白這是<strong>更「純粹」的福音</strong>：確保人必定因信得救，不只是為得救提供「可能性」</li>
+            </ul>
+          </div>
+          <div class="info-box" style="display: flex; flex-direction: column; justify-content: center;">
+            <h4>2. 對聖經真理忽視 → 生活上不持守</h4>
+            <p style="margin-bottom: 0; font-weight: 500;">
+              福音真理上的偏差令人最擔憂。我們如何理解十字架的救贖，直接影響我們對神主權、恩典與信心的倚靠。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: 清教徒約翰歐文 (John Owen) 的觀點 -->
+      <section class="slide" data-title="清教徒約翰歐文 (John Owen) 的觀點">
+        <h2>
+          <span>清教徒約翰歐文 (John Owen) 的觀點</span>
+          <small style="font-size: 0.58em; font-style: italic; color: var(--pico-muted-color);">The Death of Death in
+            the Death of Christ</small>
+        </h2>
+        <p style="margin-bottom: 0.65rem;">
+          歐文認為，關於基督救贖（十字架代贖）的範圍與對象，在邏輯上只有以下三種可能：
+        </p>
+
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.65rem;">
+          <button type="button" class="ctrl-btn" id="s6NextBtn">逐步推理：檢視 (c)</button>
+          <button type="button" class="outline ctrl-btn" id="s6ResetBtn">重設</button>
+        </div>
+
+        <div class="owen-grid">
+          <!-- Option A -->
+          <div class="owen-card" id="owenCardA" data-owen="a">
+            <div class="owen-title">a. 基督為全人類的所有罪而死</div>
+            <div class="owen-en">All the sins of all men</div>
+            <div class="owen-detail">
+              <ul style="margin-bottom: 0; padding-left: 1.1rem;">
+                <li>如果唔駛落地獄，就等同<strong>普救論</strong></li>
+                <li>如果落地獄，就有<strong>雙重刑罰</strong>：如果你亂拋垃圾，有人幫你畀咗 3000 蚊嘅罰款，你仲使唔使俾錢？</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Option B -->
+          <div class="owen-card" id="owenCardB" data-owen="b">
+            <div class="owen-title">b. 基督為部分人的所有罪而死</div>
+            <div class="owen-en">All the sins of some men（即選民）</div>
+            <div class="owen-detail">
+              <ul style="margin-bottom: 0; padding-left: 1.1rem;">
+                <li><strong>邏輯上最合理，前後一致</strong></li>
+                <li>應對其他經文：「我為他們祈求，不為世人祈求，卻為你所賜給我的人祈求，因他們本是你的。」（約翰福音 17:9）</li>
+                <li>若基督為所有人死，卻不為全人類代求，這存在矛盾</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Option C -->
+          <div class="owen-card" id="owenCardC" data-owen="c">
+            <div class="owen-title">c. 基督為全人類的部分罪而死</div>
+            <div class="owen-en">Some the sins of all men</div>
+            <div class="owen-detail">
+              <ul style="margin-bottom: 0; padding-left: 1.1rem;">
+                <li>剩低嘅罪點算？</li>
+                <li><strong>冇人可以得救</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="discussion-prompt hidden-el" id="s6DiscussionPrompt">💬 有冇人有其他意見？</div>
+      </section>
+
+      <!-- SLIDE 7: 基督為全人類的所有罪而死，但人因不信而下地獄 (Interactive Flowchart) -->
+      <section class="slide" data-title="邏輯推演：不信是不是一種罪？">
+        <h2>
+          <span>基督為全人類的所有罪而死，但人因不信而下地獄</span>
+          <div>
+            <button type="button" class="ctrl-btn" id="s7NextBtn">顯示下一步 (1 / 5)</button>
+            <button type="button" class="outline ctrl-btn" id="s7ResetBtn">重設</button>
+          </div>
+        </h2>
+
+        <div class="flowchart-container">
+          <!-- Step 1: Root Question -->
+          <div class="flow-node flow-root visible-step" id="flowStep1">
+            歐文反問：「請問『不信（Unbelief）』是不是一種罪？」
+          </div>
+
+          <!-- Steps 2 & 3: Main Branches -->
+          <div class="flow-branches">
+            <!-- Left Branch: Step 2 -->
+            <div class="flow-node hidden-step" id="flowStep2">
+              <span class="flow-badge badge-warn">情況一：如果「不信」不是罪</span>
+              <p style="margin-bottom: 0; font-size: 0.98rem;">
+                那人為什麼會因為「不信」而下地獄（約 3:18, 16:9）？<br>
+                <strong>→ 與聖經直接矛盾！</strong>
+              </p>
+            </div>
+
+            <!-- Right Branch: Step 3 + Sub-branches 4 & 5 -->
+            <div class="flow-node hidden-step" id="flowStep3">
+              <span class="flow-badge badge-info">情況二：如果「不信」是一種罪</span>
+              <p style="margin-bottom: 0.35rem; font-size: 0.98rem;">
+                那麼請問：基督在十字架上有沒有為人們「不信的罪」作挽回祭？
+              </p>
+
+              <div class="flow-sub-branches">
+                <div class="flow-node hidden-step" id="flowStep4" style="padding: 0.65rem 0.85rem;">
+                  <span class="flow-badge badge-warn">如果有</span>
+                  <p style="margin-bottom: 0; font-size: 0.92rem;">
+                    既然基督已經為他們的「不信之罪」付清了代價、平息了神的怒氣，為什麼他們還會因為「不信」而下地獄？
+                  </p>
+                </div>
+
+                <div class="flow-node hidden-step" id="flowStep5" style="padding: 0.65rem 0.85rem;">
+                  <span class="flow-badge badge-warn">如果沒有</span>
+                  <p style="margin-bottom: 0; font-size: 0.92rem;">
+                    那就證明基督在十字架上<strong>並沒有</strong>為所有人的一切罪作挽回祭！
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="s7Conclusion" class="hidden-el">
+          <div class="key-takeaway">
+            重點：基督的死不只是為得救提供「可能性」，而是讓救恩變成真實
+          </div>
+          <div class="discussion-prompt">💬 有冇反對意見／經文？</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: 福音派的觀點 - 吳主光 / 戴夫亨特 (Dave Hunt) -->
+      <section class="slide" data-title="福音派的觀點 - 吳主光 / 戴夫亨特 (Dave Hunt)">
+        <h2>福音派的觀點 - 吳主光 / 戴夫亨特 (Dave Hunt)</h2>
+
+        <div class="spotlight-tabs" role="tablist">
+          <button type="button" class="spotlight-tab" data-s8-tab="0">論點一：溺水者比喻</button>
+          <button type="button" class="spotlight-tab outline" data-s8-tab="1">論點二：按字面理解聖經</button>
+          <button type="button" class="spotlight-tab outline" data-s8-tab="2">論點三：神對萬人的真誠呼召</button>
+        </div>
+
+        <div class="spotlight-panel active" data-s8-panel="0">
+          <h4 style="color: var(--slide-accent); margin-bottom: 0.6rem;">1. 「溺水者」的比喻與人的責任</h4>
+          <p style="margin-bottom: 0;">
+            亨特常用「溺水者」作比喻：救生員已經付上代價游到溺水者身邊伸出援手，但溺水者仍須放棄掙扎、接受救援。同樣地，基督在十字架上為全人類付清了罪債，但這份赦免必須透過人的「接受（信靠）」才能生效。人若拒絕這份禮物而滅亡，責任完全在於人自己，並不代表基督沒有為他付代價，也不構成神「雙重追討」。
+          </p>
+        </div>
+
+        <div class="spotlight-panel" data-s8-panel="1">
+          <h4 style="color: var(--slide-accent); margin-bottom: 0.6rem;">2. 聖經字面的清晰性</h4>
+          <p style="margin-bottom: 0;">
+            他認為，如果約翰福音 3:16 的「神愛世人」和約翰一書 2:2 的「為普天下人的罪作了挽回祭」都不能按字面理解，那麼一般信徒將無法直接讀懂聖經，必須依賴神學菁英的「密碼翻譯」才能明白福音。
+          </p>
+        </div>
+
+        <div class="spotlight-panel" data-s8-panel="2">
+          <h4 style="color: var(--slide-accent); margin-bottom: 0.6rem;">3. 福音呼召的真誠性</h4>
+          <p style="margin-bottom: 0;">
+            聖經明言神「願意萬人得救」（提前 2:4），並親自勸勉罪人「你們來，我們彼此辯論」（賽
+            1:18）。如果神在永恆中早已決定不拯救某些人，基督也根本沒有為他們流血，那麼神在福音書中對眾人發出的悔改呼召與哀哭，就會變成一場缺乏誠意的「假象／演戲（charade）」。
+          </p>
+        </div>
+
+        <div id="s8Conclusion" class="key-takeaway hidden-el">
+          重點：福音是向全人類的呼召
+        </div>
+      </section>
+
+      <!-- SLIDE 9: 兩派對比 -->
+      <section class="slide slide-full" data-title="兩派對比">
+        <div class="s9-wrapper">
+          <!-- 頂部標題與單步導覽控制 -->
+          <div class="s9-header">
+            <h2>兩派對比</h2>
+            <div class="s9-nav-box">
+              <button type="button" id="s9PrevStepBtn" class="s9-nav-btn" title="上一步">◀ 上一步</button>
+              <span id="s9-step-indicator" class="s9-step-indicator">步驟 1 / 4</span>
+              <button type="button" id="s9NextStepBtn" class="s9-nav-btn" title="下一步">下一步 ▶</button>
+            </div>
+          </div>
+
+          <!-- 步驟 1：共同邊界公設 -->
+          <div class="s9-step1-wrap">
+            <div id="s9-step-card-1" data-s9-step="1" class="s9-step-card s9-step1-card">
+              <button type="button" data-s9-toggle="1" class="s9-accordion-btn">
+                <div style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span class="s9-badge-amber">步驟 1</span>
+                  <h3 class="s9-step1-title">起始共識：基督完成代贖 ＋ 聖經明言「並非全人類皆得救」</h3>
+                </div>
+                <svg class="s9-chevron" style="color: #94a3b8;" fill="none" stroke="currentColor" stroke-width="2.5"
+                  viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div class="s9-step-details s9-step1-details">
+                <p style="margin: 0; font-size: 0.84rem; color: #cbd5e1; line-height: 1.55;">
+                  雙方都反對「普救論」，共同承認聖經既有十字架救贖的宣告，也明確指出最終有人滅亡。
+                </p>
+                <div class="s9-core-pill">
+                  共同核心問題：<span style="color: #fcd34d; font-weight: 700;">主為普天下人的罪作了挽回祭，為何仍有人下地獄？</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 向下分岔 SVG -->
+            <svg class="s9-fork-svg" viewBox="0 0 800 44" fill="none" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M400 0 V18" stroke="#94a3b8" stroke-width="2.5"></path>
+              <path d="M400 18 H200 V44" stroke="#6366f1" stroke-width="2.5" class="s9-flow-line-animated"></path>
+              <path d="M400 18 H600 V44" stroke="#10b981" stroke-width="2.5" class="s9-flow-line-animated"></path>
+              <circle cx="400" cy="18" r="5" fill="#fbbf24"></circle>
+            </svg>
+          </div>
+
+          <!-- 核心三欄主體 -->
+          <div class="s9-main-grid">
+            <!-- 左欄：約翰·歐文 -->
+            <div class="s9-col-indigo">
+              <div class="s9-col-header s9-col-header-indigo">
+                <div>
+                  <h3>約翰·歐文（特定救贖派）</h3>
+                </div>
+                <span class="s9-pill-indigo">三集合重合</span>
+              </div>
+
+              <!-- 漸進疊加文氏圖（精簡內嵌標籤） -->
+              <div class="s9-venn-box s9-venn-box-indigo">
+                <svg class="s9-venn-svg" viewBox="0 0 380 215" fill="none" role="img" aria-label="約翰歐文漸進式三層文氏圖">
+                  <rect x="8" y="8" width="364" height="199" rx="16" fill="#0f172a" stroke="#64748b" stroke-width="1.5"
+                    stroke-dasharray="5 4"></rect>
+                  <text x="20" y="29" fill="#e2e8f0" font-size="12.5" font-weight="800">1. 全人類</text>
+
+                  <g id="s9-owen-layer-1" class="s9-layer-fade" style="opacity: 0;">
+                    <circle cx="105" cy="118" r="68" fill="#312e81" fill-opacity="0.72" stroke="#a5b4fc"
+                      stroke-width="2.5"></circle>
+                    <line x1="164" y1="82" x2="196" y2="54" stroke="#a5b4fc" stroke-width="1.5"></line>
+                    <circle cx="164" cy="82" r="2.5" fill="#a5b4fc"></circle>
+                    <text x="202" y="58" fill="#e0e7ff" font-size="11.5" font-weight="800">2. 代贖範圍（選民）</text>
+                  </g>
+
+                  <g id="s9-owen-layer-2" class="s9-layer-fade" style="opacity: 0;">
+                    <circle cx="105" cy="118" r="60" fill="#3730a3" fill-opacity="0.6" stroke="#7dd3fc"
+                      stroke-width="2.5" stroke-dasharray="5 3"></circle>
+                    <line x1="164" y1="108" x2="196" y2="92" stroke="#7dd3fc" stroke-width="1.5"></line>
+                    <circle cx="164" cy="108" r="2.5" fill="#7dd3fc"></circle>
+                    <text x="202" y="90" fill="#bae6fd" font-size="11.5" font-weight="800">3. 聖靈賜信心</text>
+                    <text x="202" y="105" fill="#e0f2fe" font-size="10.5" font-weight="700">（100% 重合）</text>
+                  </g>
+
+                  <g id="s9-owen-layer-3" class="s9-layer-fade" style="opacity: 0;">
+                    <g id="s9-venn-o-saved" style="transition: opacity 0.3s ease;">
+                      <circle cx="105" cy="118" r="52" fill="none" stroke="#fcd34d" stroke-width="2.5"></circle>
+                      <rect x="47" y="100" width="116" height="36" rx="8" fill="#0f172a" stroke="#fcd34d"
+                        stroke-width="1.75"></rect>
+                      <text x="105" y="116" text-anchor="middle" fill="#fef08a" font-size="11.5" font-weight="900">4a.
+                        必定得救</text>
+                      <text x="105" y="130" text-anchor="middle" fill="#f8fafc" font-size="10"
+                        font-weight="700">三層合一</text>
+                    </g>
+
+                    <g id="s9-venn-o-unsaved" style="transition: opacity 0.3s ease;">
+                      <text x="202" y="148" fill="#fecdd3" font-size="11.5" font-weight="800">4b. 無代贖 · 無信心</text>
+                      <text x="202" y="166" fill="#fda4af" font-size="11.5" font-weight="900">➔ 沉淪</text>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+
+              <!-- 歐文核心思想（點擊「揭示核心結論」時顯示於此圖下方） -->
+              <div id="s9-owen-conclusion" class="s9-conclusion-box-indigo hidden-el">
+                <div>核心思想：<span style="color: #c7d2fe; font-weight: 800;">基督的死不只是為得救提供「可能性」，而是讓救恩變成真實</span></div>
+                <div style="margin-top: 0.35rem; color: #e0e7ff; font-weight: 700;">• 歐文不反對福音是普世呼召</div>
+              </div>
+            </div>
+
+            <!-- 中央欄：步驟對照焦點與 4a/4b 控制 -->
+            <div class="s9-center-col">
+              <span class="s9-center-badge">⚡ 集合圖層對照</span>
+
+              <div id="s9-center-focus-2" data-s9-step="2" data-s9-toggle="2"
+                class="s9-center-focus-card s9-focus-card">
+                <div style="font-size: 0.78rem; font-weight: 800; color: #fde68a;">步驟 2 · 代贖</div>
+                <div style="font-size: 0.85rem; font-weight: 700; color: #ffffff; margin-top: 0.2rem;">選民 vs. 全人類</div>
+              </div>
+
+              <div id="s9-center-focus-3" data-s9-step="3" data-s9-toggle="3"
+                class="s9-center-focus-card s9-focus-card">
+                <div style="font-size: 0.78rem; font-weight: 800; color: #fde68a;">步驟 3 · 信心</div>
+                <div style="font-size: 0.85rem; font-weight: 700; color: #ffffff; margin-top: 0.2rem;">聖靈所賜 vs. 憑信領受
+                </div>
+              </div>
+
+              <div id="s9-center-focus-4" data-s9-step="4" data-s9-toggle="4"
+                class="s9-center-focus-card s9-focus-card">
+                <div style="font-size: 0.78rem; font-weight: 800; color: #fde68a;">步驟 4 · 結局</div>
+                <div style="font-size: 0.85rem; font-weight: 700; color: #ffffff; margin-top: 0.2rem;">合一 vs. 交集</div>
+              </div>
+
+              <div id="s9-step4-branch-controls" class="s9-branch-box">
+                <div style="font-size: 0.76rem; font-weight: 700; color: #cbd5e1; text-align: center;">步驟 4 聚焦</div>
+                <button type="button" data-s9-path="saved"
+                  class="s9-path-btn s9-path-btn-saved is-selected">4a：得救</button>
+                <button type="button" data-s9-path="unsaved" class="s9-path-btn s9-path-btn-unsaved">4b：沉淪</button>
+                <button type="button" data-s9-path="all" class="s9-path-btn s9-path-btn-all">全部顯示</button>
+              </div>
+
+              <button id="s9-conclusion-toggle-btn" type="button" class="s9-conclusion-btn">揭示核心結論</button>
+            </div>
+
+            <!-- 右欄：Dave Hunt & 吳主光 -->
+            <div class="s9-col-emerald">
+              <div class="s9-col-header s9-col-header-emerald">
+                <div>
+                  <h3>Dave Hunt ＆ 吳主光（普世代贖派）</h3>
+                </div>
+                <span class="s9-pill-emerald">代贖與信心交集</span>
+              </div>
+
+              <!-- 漸進疊加文氏圖（精簡內嵌標籤） -->
+              <div class="s9-venn-box s9-venn-box-emerald">
+                <svg class="s9-venn-svg" viewBox="0 0 380 215" fill="none" role="img"
+                  aria-label="Dave Hunt 與吳主光漸進式三層文氏圖">
+                  <rect x="8" y="8" width="364" height="199" rx="16" fill="#0f172a" stroke="#64748b" stroke-width="1.5"
+                    stroke-dasharray="5 4"></rect>
+                  <text x="20" y="29" fill="#e2e8f0" font-size="12.5" font-weight="800">1. 全人類</text>
+
+                  <g id="s9-hunt-layer-1" class="s9-layer-fade" style="opacity: 0;">
+                    <rect x="16" y="36" width="348" height="163" rx="22" fill="#064e3b" fill-opacity="0.58"
+                      stroke="#6ee7b7" stroke-width="2.5"></rect>
+                    <text x="190" y="56" text-anchor="middle" fill="#a7f3d0" font-size="11.5" font-weight="800">2.
+                      代贖範圍（100% 全人類）</text>
+                  </g>
+
+                  <g id="s9-hunt-layer-2" class="s9-layer-fade" style="opacity: 0;">
+                    <circle cx="105" cy="128" r="58" fill="#065f46" fill-opacity="0.78" stroke="#7dd3fc"
+                      stroke-width="2.5" stroke-dasharray="5 3"></circle>
+                    <line x1="158" y1="104" x2="196" y2="88" stroke="#7dd3fc" stroke-width="1.5"></line>
+                    <circle cx="158" cy="104" r="2.5" fill="#7dd3fc"></circle>
+                    <text x="202" y="92" fill="#bae6fd" font-size="11.5" font-weight="800">3. 憑信領受</text>
+                  </g>
+
+                  <g id="s9-hunt-layer-3" class="s9-layer-fade" style="opacity: 0;">
+                    <g id="s9-venn-h-saved" style="transition: opacity 0.3s ease;">
+                      <circle cx="105" cy="128" r="50" fill="none" stroke="#fcd34d" stroke-width="2.5"></circle>
+                      <rect x="47" y="108" width="116" height="40" rx="8" fill="#022c22" stroke="#fcd34d"
+                        stroke-width="1.75"></rect>
+                      <text x="105" y="125" text-anchor="middle" fill="#fef08a" font-size="11.5" font-weight="900">4a.
+                        永遠得救</text>
+                      <text x="105" y="141" text-anchor="middle" fill="#a7f3d0" font-size="10.5" font-weight="800">代贖 ＋
+                        信心</text>
+                    </g>
+
+                    <g id="s9-venn-h-unsaved" style="transition: opacity 0.3s ease;">
+                      <text x="202" y="132" fill="#fecdd3" font-size="11.5" font-weight="800">4b. 有贖價 · 拒信</text>
+                      <text x="202" y="150" fill="#fda4af" font-size="11.5" font-weight="900">➔ 自負沉淪</text>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+
+              <!-- 亨特核心思想（點擊「揭示核心結論」時顯示於此圖下方） -->
+              <div id="s9-hunt-conclusion" class="s9-conclusion-box-emerald hidden-el">
+                <div>核心思想：<span style="color: #a7f3d0; font-weight: 800;">福音向全人類的普世呼召 — 福音派的核心信念</span></div>
+                <div style="margin-top: 0.35rem; color: #d1fae5; font-weight: 700;">• 亨特不反對救恩是真實，罪債被基督付清</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: 會影響我們傳福音嗎？ -->
+      <section class="slide" data-title="會影響我們傳福音嗎？">
+        <h2>會影響我們傳福音嗎？</h2>
+        <div class="two-col" style="margin-bottom: 0.9rem;">
+          <div class="info-box">
+            <h4>1. 福音的呼召仍然一樣</h4>
+            <p style="margin-bottom: 0.65rem;">信主就得永生，不信就會滅亡。</p>
+            <blockquote
+              style="margin: 0; padding: 0.65rem 0.9rem; font-size: 0.98rem; border-left: 4px solid var(--slide-gold); background: var(--slide-gold-soft); border-radius: 0.45rem;">
+              司布真：「神沒有在選民背上畫記號，所以我們要向所有人傳福音。」
+            </blockquote>
+          </div>
+
+          <div class="info-box">
+            <h4>2. 不阻礙傳福音；相反，我可以真誠相信祈禱、盼望神改變人心</h4>
+            <ul style="margin-bottom: 0; font-size: 0.98rem;">
+              <li>我不相信：神想救全人類，卻限制自己的自由讓人自由揀選</li>
+              <li>神的救恩實在施行：神會在人心靈裡生發「羨慕」的心</li>
+              <li><em>若果人掌握最後的決定權，為什麼要祈禱呢，去求人不是更加直接嗎？</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="info-box" style="background: var(--slide-accent-soft); border-color: var(--slide-accent);">
+          <ul style="margin-bottom: 0;">
+            <li><strong>人會揀錯，但神唔會出錯，神的計劃必定成功</strong>（不代表可以隨便犯罪、也不代表沒有艱難）</li>
+            <li>還是，人會揀錯，並可能會打亂神的全盤計劃？</li>
           </ul>
-        </article>
-        <article class="card">
-          <h3>為甚麼仍然重要</h3>
-          <ul class="compact">
-            <li>更信靠全能的神：祂確保人必定相信得救，不只是提供「可能性」。</li>
-            <li>不持守聖經真理，可能帶來生活上的不持守。</li>
-            <li>福音真理上的偏差尤其令人擔憂。</li>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: 應用 -->
+      <section class="slide" data-title="應用：約翰一書 2:1-2">
+        <h2>應用</h2>
+        <blockquote class="scripture-quote"
+          style="padding: 0.95rem 1.4rem; font-size: clamp(1.02rem, 1.45vw, 1.25rem);">
+          <p style="margin-bottom: 0.5rem;">
+            <span class="verse-num">1</span>我小子們哪，我將這些話寫給你們，是要叫你們不犯罪。若有人犯罪，在父那裏我們有一位中保，就是那義者耶穌基督。
+          </p>
+          <p style="margin-bottom: 0;">
+            <span class="verse-num">2</span>他為我們的罪作了挽回祭，不是單為我們的罪，也是為普天下人的罪。
+          </p>
+        </blockquote>
+
+        <div class="info-box" style="margin-top: 0.75rem;">
+          <div
+            style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
+            <h4 style="margin-bottom: 0;">「不犯罪」難嗎，聽完一整堂之後，有沒有想到什麼方法可以達成？</h4>
+            <button type="button" class="ctrl-btn" id="s11RevealBtn">顯示回應與反思</button>
+          </div>
+          <ul id="s11AnswerList" class="hidden-el"
+            style="margin-bottom: 0; margin-top: 0.65rem; padding-top: 0.65rem; border-top: 1px dashed var(--pico-muted-border-color); animation: slideFadeIn 0.3s ease;">
+            <li>並沒有產生一個高深／新奇的方法，讓人不犯罪</li>
+            <li>努力活出聖潔生活，若犯罪就要悔改，恢復和神的關係（好像本來就知道？）</li>
+            <li><strong>對神的工作更加有信心</strong></li>
           </ul>
-        </article>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Presenter Controls -->
+    <footer class="controls-bar">
+      <div class="controls-group">
+        <button type="button" class="outline ctrl-btn" id="prevBtn" aria-label="上一頁">← 上一頁</button>
+        <button type="button" class="ctrl-btn" id="nextBtn" aria-label="下一頁">下一頁 →</button>
       </div>
-    </section>
 
-    <section class="slide" aria-labelledby="owen">
-      <p class="eyebrow">清教徒約翰・歐文｜The Death of Death in the Death of Christ</p>
-      <h2 id="owen">歐文提出三種可能</h2>
-      <p class="subtitle">基督救贖的範圍與對象，邏輯上可這樣排列：</p>
-      <div class="grid three">
-        <article class="card">
-          <span class="label">A</span>
-          <h3>全人類的所有罪</h3>
-          <p class="small">All the sins of all men</p>
-        </article>
-        <article class="card">
-          <span class="label">B</span>
-          <h3>部分人的所有罪</h3>
-          <p class="small">All the sins of some men</p>
-        </article>
-        <article class="card">
-          <span class="label">C</span>
-          <h3>全人類的部分罪</h3>
-          <p class="small">Some of the sins of all men</p>
-        </article>
+      <button type="button" class="slide-counter" id="overviewBtn" title="點擊檢視所有投影片目錄">
+        <span id="slideCounterText">1 / 11</span>
+      </button>
+
+      <div class="controls-group">
+        <button type="button" class="outline ctrl-btn" id="themeToggleBtn" title="切換深色/淺色主題">🌓 <span
+            class="hide-mobile">主題</span></button>
+        <button type="button" class="outline ctrl-btn" id="fullscreenBtn" title="全螢幕簡報">⛶ <span
+            class="hide-mobile">全螢幕</span></button>
       </div>
-      <p class="small muted">接下來是歐文如何檢視這三個選項；請留意這是他的論證路徑。</p>
-    </section>
+    </footer>
+  </div>
 
-    <section class="slide" aria-labelledby="some-sins">
-      <p class="eyebrow">檢視選項 C</p>
-      <h2 id="some-sins">若基督只為所有人的「部分罪」而死？</h2>
-      <div class="card">
-        <p class="lead">那麼，仍有罪沒有被處理，<br><span class="accent">沒有人能因這救贖得完全拯救。</span></p>
-        <p class="muted">這是歐文排除「全人類的部分罪」的推論。</p>
-      </div>
-    </section>
+  <!-- Slide Overview Dialog -->
+  <dialog id="overviewDialog">
+    <article>
+      <header style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="margin: 0;">投影片總覽目錄</h3>
+        <button type="button" class="outline ctrl-btn" id="closeOverviewBtn">關閉 ✕</button>
+      </header>
+      <div class="overview-grid" id="overviewGrid"></div>
+    </article>
+  </dialog>
 
-    <section class="slide" aria-labelledby="all-sins">
-      <p class="eyebrow">檢視選項 A</p>
-      <h2 id="all-sins">若基督為全人類的「所有罪」而死？</h2>
-      <div class="grid">
-        <article class="card">
-          <span class="label">推論一</span>
-          <h3>普救論</h3>
-          <p>若所有人的所有罪都已承擔，則所有人都得救。</p>
-        </article>
-        <article class="card">
-          <span class="label">推論二</span>
-          <h3>雙重刑罰的疑問</h3>
-          <p>若人仍因罪受罰，是否等於同一罪債被追討兩次？</p>
-        </article>
-      </div>
-      <p class="notice small"><strong>想像一下：</strong>亂拋垃圾被罰 $3,000，有人已替你繳清；你還需要再付一次嗎？歐文追問：若基督已替人付清罪債，為何人仍會下地獄？</p>
-    </section>
-
-    <section class="slide" aria-labelledby="some-people">
-      <p class="eyebrow">歐文的結論</p>
-      <h2 id="some-people">只有選項 B 前後一致</h2>
-      <p class="lead">基督為<span class="accent">部分人的所有罪</span>而死，<br>使救恩不只是可能，而是真實成就。</p>
-      <div class="card">
-        <h3>歐文引用的經文</h3>
-        <p>「我為他們祈求，不為世人祈求，卻為你所賜給我的人祈求，因他們本是你的。」</p>
-        <p class="small muted">約翰福音 17:9</p>
-      </div>
-      <p class="small muted">他的論點：若基督為所有人死，卻不為所有人代求，兩者之間似乎存在張力。</p>
-      <p class="small">有沒有其他意見？</p>
-    </section>
-
-    <section class="slide" aria-labelledby="unbelief">
-      <p class="eyebrow">歐文的追問｜不信是不是罪？</p>
-      <h2 id="unbelief">「不信」論證</h2>
-      <div class="step"><span class="letter">1</span><span>反對者：人因不信而下地獄。</span></div>
-      <div class="step"><span class="letter">2</span><span>歐文反問：<strong>不信是不是一種罪？</strong></span></div>
-      <div class="grid">
-        <article class="card">
-          <span class="label">若不信不是罪</span>
-          <p>為甚麼人會因不信被定罪？<br><span class="small muted">參：約翰福音 3:18、16:9</span></p>
-        </article>
-        <article class="card">
-          <span class="label">若不信是罪</span>
-          <p>基督有沒有為不信之罪作挽回祭？若有，罪債既已付清、神的怒氣已平息，為何人仍因不信下地獄？</p>
-        </article>
-      </div>
-      <p class="small"><span class="arrow">→</span> 若沒有：就證明基督並沒有為所有人的一切罪作挽回祭。</p>
-      <p class="quote">基督的死不只是提供得救的「可能性」，而是讓救恩成為真實。</p>
-      <p class="small muted">有沒有反對意見或相關經文？</p>
-    </section>
-
-    <section class="slide" aria-labelledby="hunter">
-      <p class="eyebrow">福音派觀點｜吳主光牧師・戴夫・亨特</p>
-      <h2 id="hunter">救生員與溺水者</h2>
-      <div class="card">
-        <p class="lead">救生員已付代價游到身邊，<br>溺水者仍須<span class="teal">停止掙扎、接受救援</span>。</p>
-        <p>亨特以此比喻：基督在十字架上為全人類付清罪債，赦免必須透過人的「接受（信靠）」才能生效。人若拒絕禮物而滅亡，責任在於人；這不代表基督沒有付代價，也不構成神「雙重追討」。</p>
-      </div>
-    </section>
-
-    <section class="slide" aria-labelledby="gospel-call">
-      <p class="eyebrow">福音派觀點｜福音向全人類的呼召</p>
-      <h2 id="gospel-call">經文能否讓一般信徒直接讀懂？</h2>
-      <div class="card">
-        <span class="label">按字面讀經</span>
-        <p class="lead">「神愛世人」（約 3:16）<br>「為普天下人的罪作挽回祭」（約一 2:2）</p>
-        <p>亨特認為，若這些經文都不能按字面理解，一般信徒便似乎要依賴神學菁英的「密碼翻譯」才能明白福音。</p>
-      </div>
-    </section>
-
-    <section class="slide" aria-labelledby="sincere-call">
-      <p class="eyebrow">福音派觀點｜福音向全人類的呼召</p>
-      <h2 id="sincere-call">神向罪人的邀請是否真誠？</h2>
-      <div class="card">
-        <p>聖經明言神「願意萬人得救」（提前 2:4），並親自勸勉罪人：「你們來，我們彼此辯論」（賽 1:18）。</p>
-      </div>
-      <p class="notice">亨特的疑問：若神在永恆中已決定不拯救某些人，基督也沒有為他們流血，那麼向眾人發出的悔改呼召與哀哭，會不會成為缺乏誠意的「假象／演戲（charade）」？</p>
-      <p class="quote">核心信念：維護福音向全人類的呼召。</p>
-    </section>
-
-    <section class="slide" aria-labelledby="compare">
-      <p class="eyebrow">小結與對比</p>
-      <h2 id="compare">兩邊各自強調甚麼？</h2>
-      <table>
-        <thead>
-          <tr><th scope="col">焦點</th><th scope="col">歐文｜特定救贖</th><th scope="col">亨特｜普世代贖</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">挽回祭</th><td>基督承擔刑罰，救恩確實成就。</td><td>基督為眾人付代價，人仍須以信接受。</td></tr>
-          <tr><th scope="row">「世人」</th><td>理解為選民；與基督為誰代求相呼應。</td><td>理解為全人類；強調福音向眾人呼召。</td></tr>
-          <tr><th scope="row">核心關注</th><td>救恩不是可能性，而是實際成就。</td><td>福音邀請真誠地向全人類發出。</td></tr>
-        </tbody>
-      </table>
-      <p class="small muted">這是兩種觀點的簡要呈現；不同傳統內部仍有更多細節與差異。</p>
-    </section>
-
-    <section class="slide" aria-labelledby="together">
-      <p class="eyebrow">能否只看成對立？</p>
-      <h2 id="together">不同強調，不必抹去共同信念</h2>
-      <div class="grid">
-        <article class="card">
-          <span class="label">歐文不等於</span>
-          <h3>反對傳福音給所有人</h3>
-          <p>福音的普世呼召仍然真實。</p>
-        </article>
-        <article class="card">
-          <span class="label">亨特不等於</span>
-          <h3>否定救恩的真實性</h3>
-          <p>基督的死真實付上代價，救恩不是空談。</p>
-        </article>
-      </div>
-      <p class="lead">先準確理解對方所守護的真理，<br>再談分歧。</p>
-    </section>
-
-    <section class="slide" aria-labelledby="evangelism">
-      <p class="eyebrow">傳福音應用</p>
-      <h2 id="evangelism">我們的信息仍然清楚</h2>
-      <div class="card">
-        <p class="lead">信主就得永生；<br>不信就會滅亡。</p>
-        <p>司布真提醒：神沒有在選民背上畫記號，所以我們要向所有人傳福音。</p>
-      </div>
-      <div class="grid">
-        <article class="card">
-          <h3>祈禱與盼望</h3>
-          <p class="small">我不相信神想救全人類，卻限制自己的自由、讓人自由揀選。神的救恩實在施行：祂能在人心靈裏生發「羨慕」的心。若最後決定權在人的選擇，為甚麼祈禱，不直接求人就好？</p>
-        </article>
-        <article class="card">
-          <h3>謙卑與信靠</h3>
-          <p class="small">人會揀錯，但神不會出錯，祂的計劃必定成功；另一種擔憂是，人會揀錯並打亂神的全盤計劃。神的主權不代表可以犯罪，也不代表沒有艱難。</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="slide" aria-labelledby="application">
-      <p class="eyebrow">回到經文｜約翰一書 2:1–2</p>
-      <h2 id="application">聽完之後，怎樣面對罪？</h2>
-      <blockquote class="scripture">
-        我小子們哪，我將這些話寫給你們，是要叫你們不犯罪。若有人犯罪，在父那裏我們有一位中保，就是那義者耶穌基督。<br>
-        他為我們的罪作了挽回祭，不是單為我們的罪，也是為普天下人的罪。
-        <cite>約翰一書 2:1–2</cite>
-      </blockquote>
-      <div class="grid">
-        <article class="card">
-          <h3>努力活出聖潔</h3>
-          <p>經文沒有給一個高深新奇的捷徑；仍要努力不犯罪。</p>
-        </article>
-        <article class="card">
-          <h3>犯罪就悔改</h3>
-          <p>靠着中保耶穌基督，回轉歸向神，恢復與祂的關係。</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="slide" aria-labelledby="discussion">
-      <p class="eyebrow">討論與回應</p>
-      <h2 id="discussion" class="closing">我們對神的工作，<br><span class="accent">可以更有信心。</span></h2>
-      <p class="lead">你仍有甚麼疑問？<br>有沒有其他經文或觀點想一起思考？</p>
-      <p class="kicker">約翰一書 2:1–2｜挽回祭與救贖的範圍</p>
-    </section>
-  </main>
-
-  <nav class="controls" aria-label="投影片導覽">
-    <button id="previous" class="secondary outline" type="button" aria-label="上一張">←</button>
-    <span id="counter" aria-live="polite"></span>
-    <button id="next" class="secondary outline" type="button" aria-label="下一張">→</button>
-  </nav>
   <script>
-    (() => {
-      const slides = [...document.querySelectorAll(".slide")];
-      const counter = document.getElementById("counter");
-      const progress = document.getElementById("progress");
-      let active = 0;
+    (function () {
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const totalSlides = slides.length;
+      let currentIndex = 0;
 
-      const show = (index) => {
-        active = Math.max(0, Math.min(index, slides.length - 1));
-        slides[active].scrollIntoView({ behavior: "smooth", block: "start" });
-        counter.textContent = `${active + 1} / ${slides.length}`;
-        progress.style.width = `${((active + 1) / slides.length) * 100}%`;
-      };
+      const progressFill = document.getElementById('progressFill');
+      const slideCounterText = document.getElementById('slideCounterText');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const overviewBtn = document.getElementById('overviewBtn');
+      const overviewDialog = document.getElementById('overviewDialog');
+      const closeOverviewBtn = document.getElementById('closeOverviewBtn');
+      const overviewGrid = document.getElementById('overviewGrid');
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const fullscreenBtn = document.getElementById('fullscreenBtn');
+      const slidesStage = document.getElementById('slidesStage');
 
-      document.getElementById("previous").addEventListener("click", () => show(active - 1));
-      document.getElementById("next").addEventListener("click", () => show(active + 1));
-      document.addEventListener("keydown", (event) => {
-        if (["ArrowRight", "ArrowDown", "PageDown", " "].includes(event.key)) {
-          event.preventDefault();
-          show(active + 1);
-        } else if (["ArrowLeft", "ArrowUp", "PageUp"].includes(event.key)) {
-          event.preventDefault();
-          show(active - 1);
-        } else if (event.key === "Home") {
-          show(0);
-        } else if (event.key === "End") {
-          show(slides.length - 1);
+      function showSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+        currentIndex = index;
+
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === currentIndex);
+        });
+
+        slidesStage.classList.toggle('is-full-stage', slides[currentIndex].classList.contains('slide-full'));
+
+        slideCounterText.textContent = `${currentIndex + 1} / ${totalSlides}`;
+        progressFill.style.width = `${((currentIndex + 1) / totalSlides) * 100}%`;
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === totalSlides - 1;
+        slidesStage.scrollTop = 0;
+      }
+
+      prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
+      nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (overviewDialog.open) return;
+        if (e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && e.target.tagName !== 'BUTTON')) {
+          e.preventDefault();
+          showSlide(currentIndex + 1);
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+          e.preventDefault();
+          showSlide(currentIndex - 1);
+        } else if (e.key === 'Home') {
+          showSlide(0);
+        } else if (e.key === 'End') {
+          showSlide(totalSlides - 1);
         }
       });
 
-      const observer = new IntersectionObserver((entries) => {
-        const visible = entries.filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) {
-          active = slides.indexOf(visible.target);
-          counter.textContent = `${active + 1} / ${slides.length}`;
-          progress.style.width = `${((active + 1) / slides.length) * 100}%`;
-        }
-      }, { threshold: [0.35, 0.6, 0.85] });
+      // Touch swipe navigation for mobile/tablet
+      let touchStartX = 0;
+      let touchStartY = 0;
+      slidesStage.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
 
-      slides.forEach((slide) => observer.observe(slide));
-      show(0);
+      slidesStage.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].screenX - touchStartX;
+        const dy = e.changedTouches[0].screenY - touchStartY;
+        if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+          if (dx < 0) showSlide(currentIndex + 1);
+          else showSlide(currentIndex - 1);
+        }
+      }, { passive: true });
+
+      // Overview Modal
+      overviewBtn.addEventListener('click', () => {
+        overviewGrid.innerHTML = '';
+        slides.forEach((slide, idx) => {
+          const item = document.createElement('div');
+          item.className = 'overview-item' + (idx === currentIndex ? ' current' : '');
+          item.innerHTML = `
+            <div class="overview-num">投影片 ${idx + 1}</div>
+            <div class="overview-title">${slide.dataset.title || '投影片 ' + (idx + 1)}</div>
+          `;
+          item.addEventListener('click', () => {
+            showSlide(idx);
+            overviewDialog.close();
+          });
+          overviewGrid.appendChild(item);
+        });
+        overviewDialog.showModal();
+      });
+
+      closeOverviewBtn.addEventListener('click', () => overviewDialog.close());
+      overviewDialog.addEventListener('click', (e) => {
+        if (e.target === overviewDialog) overviewDialog.close();
+      });
+
+      // Theme Toggle
+      themeToggleBtn.addEventListener('click', () => {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+        html.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+      });
+
+      // Fullscreen Toggle
+      fullscreenBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => { });
+        } else {
+          document.exitFullscreen().catch(() => { });
+        }
+      });
+
+      /* ==========================================================
+         SLIDE 4 INTERACTIVITY: Click-to-reveal ONE sub-point at a time
+      ========================================================== */
+      const s4Cards = Array.from(document.querySelectorAll('[data-s4-card]'));
+      const s4HideAllBtn = document.getElementById('s4HideAllBtn');
+
+      function updateS4Cards(targetCard) {
+        const willOpen = targetCard ? !targetCard.classList.contains('revealed') : false;
+        s4Cards.forEach((c) => {
+          const isTarget = c === targetCard && willOpen;
+          c.classList.toggle('revealed', isTarget);
+        });
+      }
+
+      s4Cards.forEach((card) => {
+        card.addEventListener('click', () => updateS4Cards(card));
+      });
+
+      s4HideAllBtn.addEventListener('click', () => updateS4Cards(null));
+
+      /* ==========================================================
+         SLIDE 6 INTERACTIVITY: John Owen c -> a -> b step & strike-out
+      ========================================================== */
+      const cardA = document.getElementById('owenCardA');
+      const cardB = document.getElementById('owenCardB');
+      const cardC = document.getElementById('owenCardC');
+      const s6NextBtn = document.getElementById('s6NextBtn');
+      const s6ResetBtn = document.getElementById('s6ResetBtn');
+      const s6DiscussionPrompt = document.getElementById('s6DiscussionPrompt');
+      let s6Stage = 0;
+
+      function updateOwenStage(stage) {
+        s6Stage = stage;
+        [cardA, cardB, cardC].forEach((c) => {
+          c.classList.remove('is-active', 'is-eliminated', 'is-winner');
+        });
+        s6DiscussionPrompt.classList.toggle('hidden-el', stage < 6);
+
+        if (stage === 0) {
+          s6NextBtn.textContent = '逐步推理：檢視 (c)';
+        } else if (stage === 1) {
+          cardC.classList.add('is-active');
+          s6NextBtn.textContent = '下一步：劃除 (c)';
+        } else if (stage === 2) {
+          cardC.classList.add('is-eliminated');
+          s6NextBtn.textContent = '下一步：檢視 (a)';
+        } else if (stage === 3) {
+          cardC.classList.add('is-eliminated');
+          cardA.classList.add('is-active');
+          s6NextBtn.textContent = '下一步：劃除 (a)';
+        } else if (stage === 4) {
+          cardC.classList.add('is-eliminated');
+          cardA.classList.add('is-eliminated');
+          s6NextBtn.textContent = '下一步：檢視並確認 (b)';
+        } else if (stage === 5) {
+          cardC.classList.add('is-eliminated');
+          cardA.classList.add('is-eliminated');
+          cardB.classList.add('is-winner');
+          s6NextBtn.textContent = '下一步：提問討論';
+        } else if (stage >= 6) {
+          cardC.classList.add('is-eliminated');
+          cardA.classList.add('is-eliminated');
+          cardB.classList.add('is-winner');
+          s6NextBtn.textContent = '已完成全部步驟';
+        }
+      }
+
+      s6NextBtn.addEventListener('click', () => {
+        if (s6Stage < 6) updateOwenStage(s6Stage + 1);
+      });
+
+      s6ResetBtn.addEventListener('click', () => updateOwenStage(0));
+
+      cardC.addEventListener('click', () => updateOwenStage(s6Stage === 1 ? 2 : 1));
+      cardA.addEventListener('click', () => updateOwenStage(s6Stage === 3 ? 4 : 3));
+      cardB.addEventListener('click', () => updateOwenStage(s6Stage === 5 ? 6 : 5));
+
+      /* ==========================================================
+         SLIDE 7 INTERACTIVITY: Step-by-step Flowchart Reveal & Grey Previous
+      ========================================================== */
+      const flowSteps = [
+        document.getElementById('flowStep1'),
+        document.getElementById('flowStep2'),
+        document.getElementById('flowStep3'),
+        document.getElementById('flowStep4'),
+        document.getElementById('flowStep5')
+      ];
+      const s7NextBtn = document.getElementById('s7NextBtn');
+      const s7ResetBtn = document.getElementById('s7ResetBtn');
+      const s7Conclusion = document.getElementById('s7Conclusion');
+      let s7CurrentStep = 1;
+
+      function updateFlowchart(stepCount) {
+        s7CurrentStep = stepCount;
+        const isFlowDone = stepCount >= 5;
+        const isAllDone = stepCount >= 6;
+
+        flowSteps.forEach((node, idx) => {
+          node.classList.remove('dimmed-step');
+          if (idx < Math.min(stepCount, 5)) {
+            node.classList.remove('hidden-step');
+            node.classList.add('visible-step');
+            if (!isAllDone && idx < stepCount - 1) {
+              if (!(idx === 2 && (stepCount === 4 || stepCount === 5))) {
+                node.classList.add('dimmed-step');
+              }
+            }
+          } else {
+            node.classList.add('hidden-step');
+            node.classList.remove('visible-step');
+          }
+        });
+
+        if (!isFlowDone) {
+          s7NextBtn.textContent = `顯示下一步 (${stepCount} / 5)`;
+          s7Conclusion.classList.add('hidden-el');
+        } else if (!isAllDone) {
+          s7NextBtn.textContent = '顯示重點結論';
+          s7Conclusion.classList.add('hidden-el');
+        } else {
+          s7NextBtn.textContent = '已完成全部推演';
+          s7Conclusion.classList.remove('hidden-el');
+        }
+      }
+
+      s7NextBtn.addEventListener('click', () => {
+        if (s7CurrentStep < 6) updateFlowchart(s7CurrentStep + 1);
+      });
+
+      s7ResetBtn.addEventListener('click', () => updateFlowchart(1));
+
+      /* ==========================================================
+         SLIDE 8 INTERACTIVITY: Single Point Spotlight & Final Key
+      ========================================================== */
+      const s8Tabs = Array.from(document.querySelectorAll('[data-s8-tab]'));
+      const s8Panels = Array.from(document.querySelectorAll('[data-s8-panel]'));
+      const s8Conclusion = document.getElementById('s8Conclusion');
+      const viewedTabs = new Set([0]);
+
+      s8Tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const targetIdx = Number(tab.dataset.s8Tab);
+          viewedTabs.add(targetIdx);
+
+          s8Tabs.forEach((t, idx) => {
+            if (idx === targetIdx) {
+              t.classList.remove('outline');
+            } else {
+              t.classList.add('outline');
+            }
+          });
+
+          s8Panels.forEach((panel, idx) => {
+            panel.classList.toggle('active', idx === targetIdx);
+          });
+
+          if (viewedTabs.size === 3) {
+            s8Conclusion.classList.remove('hidden-el');
+          }
+        });
+      });
+
+      /* ==========================================================
+         SLIDE 9 INTERACTIVITY: Venn Diagram & Logic Divergence Flowchart
+      ========================================================== */
+      let s9CurrentStep = 1;
+      let s9MaxRevealedStep = 1;
+      let s9CurrentPathMode = 'saved';
+      const s9TotalSteps = 4;
+
+      function s9ApplyPathHighlight(mode) {
+        document.querySelectorAll('.s9-path-btn-all').forEach((btn) => {
+          btn.classList.toggle('is-selected', mode === 'all');
+        });
+        document.querySelectorAll('.s9-path-btn-saved').forEach((btn) => {
+          btn.classList.toggle('is-selected', mode === 'saved');
+        });
+        document.querySelectorAll('.s9-path-btn-unsaved').forEach((btn) => {
+          btn.classList.toggle('is-selected', mode === 'unsaved');
+        });
+
+        const vennOSaved = document.getElementById('s9-venn-o-saved');
+        const vennOUnsaved = document.getElementById('s9-venn-o-unsaved');
+        const vennHSaved = document.getElementById('s9-venn-h-saved');
+        const vennHUnsaved = document.getElementById('s9-venn-h-unsaved');
+
+        [vennOSaved, vennOUnsaved, vennHSaved, vennHUnsaved].forEach((el) => {
+          if (el) el.style.opacity = '1';
+        });
+
+        if (mode === 'saved') {
+          if (vennOUnsaved) vennOUnsaved.style.opacity = '0.22';
+          if (vennHUnsaved) vennHUnsaved.style.opacity = '0.22';
+        } else if (mode === 'unsaved') {
+          if (vennOSaved) vennOSaved.style.opacity = '0.22';
+          if (vennHSaved) vennHSaved.style.opacity = '0.22';
+        }
+      }
+
+      function s9ToggleStep(stepNum) {
+        s9CurrentStep = stepNum;
+        if (stepNum > s9MaxRevealedStep) {
+          s9MaxRevealedStep = stepNum;
+        }
+
+        const indicator = document.getElementById('s9-step-indicator');
+        if (indicator) {
+          indicator.textContent = `步驟 ${s9CurrentStep} / ${s9TotalSteps}`;
+        }
+
+        const layerConfig = [
+          { id: 's9-owen-layer-1', minStep: 2 },
+          { id: 's9-owen-layer-2', minStep: 3 },
+          { id: 's9-owen-layer-3', minStep: 4 },
+          { id: 's9-hunt-layer-1', minStep: 2 },
+          { id: 's9-hunt-layer-2', minStep: 3 },
+          { id: 's9-hunt-layer-3', minStep: 4 }
+        ];
+        layerConfig.forEach(({ id, minStep }) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          el.style.opacity = s9MaxRevealedStep >= minStep ? '1' : '0';
+        });
+
+        document.querySelectorAll('.s9-step-card').forEach((card) => {
+          const cardStep = Number(card.getAttribute('data-s9-step'));
+          const details = card.querySelector('.s9-step-details');
+          card.classList.toggle('s9-step-unrevealed', cardStep > s9MaxRevealedStep);
+
+          if (cardStep === stepNum) {
+            card.classList.add('s9-step-expanded', 's9-ring-amber');
+            if (details) details.classList.remove('hidden-el');
+          } else {
+            card.classList.remove('s9-step-expanded', 's9-ring-amber');
+            if (details) details.classList.add('hidden-el');
+          }
+        });
+
+        document.querySelectorAll('.s9-center-focus-card').forEach((el) => {
+          const s = Number(el.getAttribute('data-s9-step'));
+          el.classList.toggle('s9-step-unrevealed', s > s9MaxRevealedStep);
+          el.classList.toggle('s9-ring-amber', s === stepNum);
+        });
+
+        const branchControls = document.getElementById('s9-step4-branch-controls');
+        if (branchControls) {
+          branchControls.classList.toggle('s9-step-unrevealed', s9MaxRevealedStep < 4);
+        }
+
+        s9ApplyPathHighlight(stepNum === 4 ? s9CurrentPathMode : 'all');
+      }
+
+      document.getElementById('s9PrevStepBtn').addEventListener('click', () => {
+        s9ToggleStep(s9CurrentStep > 1 ? s9CurrentStep - 1 : s9TotalSteps);
+      });
+
+      document.getElementById('s9NextStepBtn').addEventListener('click', () => {
+        s9ToggleStep(s9CurrentStep < s9TotalSteps ? s9CurrentStep + 1 : 1);
+      });
+
+      document.querySelectorAll('[data-s9-toggle]').forEach((el) => {
+        el.addEventListener('click', () => {
+          s9ToggleStep(Number(el.getAttribute('data-s9-toggle')));
+        });
+      });
+
+      document.querySelectorAll('[data-s9-path]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          s9CurrentPathMode = btn.getAttribute('data-s9-path');
+          if (s9CurrentStep !== 4) {
+            s9ToggleStep(4);
+          } else {
+            s9ApplyPathHighlight(s9CurrentPathMode);
+          }
+        });
+      });
+
+      const s9ConclusionBtn = document.getElementById('s9-conclusion-toggle-btn');
+      const s9OwenConclusion = document.getElementById('s9-owen-conclusion');
+      const s9HuntConclusion = document.getElementById('s9-hunt-conclusion');
+      s9ConclusionBtn.addEventListener('click', () => {
+        const isHidden = s9OwenConclusion.classList.contains('hidden-el');
+        s9OwenConclusion.classList.toggle('hidden-el', !isHidden);
+        s9HuntConclusion.classList.toggle('hidden-el', !isHidden);
+        s9ConclusionBtn.textContent = isHidden ? '隱藏核心結論' : '揭示核心結論';
+        s9ConclusionBtn.classList.toggle('is-open', isHidden);
+      });
+
+      s9ToggleStep(1);
+
+      /* ==========================================================
+         SLIDE 11 INTERACTIVITY: Toggle application reflection answers
+      ========================================================== */
+      const s11RevealBtn = document.getElementById('s11RevealBtn');
+      const s11AnswerList = document.getElementById('s11AnswerList');
+
+      s11RevealBtn.addEventListener('click', () => {
+        const isHidden = s11AnswerList.classList.contains('hidden-el');
+        s11AnswerList.classList.toggle('hidden-el', !isHidden);
+        s11RevealBtn.textContent = isHidden ? '隱藏回應' : '顯示回應與反思';
+      });
+
+      // Initialize first slide
+      showSlide(0);
     })();
   </script>
+
 </body>
+
 </html>
